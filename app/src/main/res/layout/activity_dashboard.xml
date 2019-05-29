@@ -16,20 +16,55 @@
             android:id="@+id/tvusernameinlogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="aaa"
+            android:text="Welcome"
             android:textAlignment="center"
             android:textColor="#FF0000"
             android:textSize="50dp"
             android:textStyle="bold" />
 
         <TextView
+
             android:id="@+id/tvuserdetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="textStart"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:text="bbb"/>
+            android:text="User Id"
+            android:textAlignment="center"
+            android:textSize="40dp" />
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Full Name"
+            android:textSize="20dp" />
+        <EditText
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone Number"
+            android:textSize="20dp" />
+        <EditText
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textSize="20dp" />
+        <Spinner
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:entries="@array/gender"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+        <Spinner
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:entries="@array/blood_group"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btnUpdateDetail"

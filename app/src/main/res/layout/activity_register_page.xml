@@ -5,21 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="#EDFF0000"
+    android:background="@drawable/backgroundwhite"
     android:orientation="vertical"
     tools:context="Fragments.RegisterPage">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:src="@drawable/blood_logo" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingRight="10dp"
+            android:text="Create an"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Account"
+            android:textColor="#FF0000"
+            android:textSize="20sp"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="10dp"
+            android:text="Here!"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"/>
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/backgroundwhite">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +77,8 @@
                     android:layout_height="150dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_image_black_24dp" />
+                    android:background="@drawable/ic_image_black_24dp"
+                    android:backgroundTint="@color/cardview_shadow_start_color" />
 
                 <ImageView
                     android:id="@+id/btnPhoto"
@@ -54,7 +92,7 @@
 
             <EditText
                 android:id="@+id/etFullname"
-                style="@style/textStyle"
+                style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_person_black_24dp"
                 android:hint="Enter Fullname"
                 android:maxLines="1" />
@@ -63,11 +101,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginLeft="35dp"
-                android:background="#f9d7db" />
+                android:background="#CF8086" />
 
             <EditText
                 android:id="@+id/etUsername"
-                style="@style/textStyle"
+                style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_person_black_24dp"
                 android:hint="Enter Username"
                 android:maxLines="1" />
@@ -76,11 +114,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginLeft="35dp"
-                android:background="#f9d7db" />
+                android:background="#CF8086" />
 
             <EditText
                 android:id="@+id/etPassword"
-                style="@style/textStyle"
+                style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
                 android:hint="Enter Password"
                 android:inputType="textPassword"
@@ -90,11 +128,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginLeft="35dp"
-                android:background="#f9d7db" />
+                android:background="#CF8086" />
 
             <EditText
                 android:id="@+id/etPassword2"
-                style="@style/textStyle"
+                style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
                 android:drawablePadding="8dp"
                 android:hint="Re-Enter Password"
@@ -105,11 +143,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginLeft="35dp"
-                android:background="#f9d7db" />
+                android:background="#CF8086" />
 
             <EditText
                 android:id="@+id/etEmail"
-                style="@style/textStyle"
+                style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_email_black_24dp"
                 android:hint="Enter Email"
                 android:maxLines="2" />
@@ -118,11 +156,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginLeft="35dp"
-                android:background="#f9d7db" />
+                android:background="#CF8086" />
 
             <EditText
                 android:id="@+id/etPhoneNo"
-                style="@style/textStyle"
+                style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_contacts_black_24dp"
                 android:hint="Enter Phone Number"
                 android:inputType="number"
@@ -132,11 +170,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginLeft="35dp"
-                android:background="#f9d7db" />
+                android:background="#CF8086" />
 
             <EditText
                 android:id="@+id/etAddress"
-                style="@style/textStyle"
+                style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_home_black_24dp"
                 android:hint="Enter Address"
                 android:maxLines="1" />
@@ -145,45 +183,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginLeft="35dp"
-                android:background="#f9d7db" />
+                android:background="#CF8086" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true">
 
                 <TextView
                     android:id="@+id/tv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:drawableLeft="@drawable/ic_person_black_24dp"
+                    android:drawableLeft="@drawable/ic_list_black_24dp"
                     android:text="Select Gender:"
-                    android:textColor="#fff"
-                    android:textSize="25sp" />
+                    android:textColor="#000"
+                    android:textSize="20sp" />
 
                 <Spinner
                     android:id="@+id/etGender"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="200dp"
+                    android:layout_marginLeft="180dp"
                     android:layout_marginTop="20dp"
                     android:background="@android:drawable/btn_dropdown"
                     android:entries="@array/gender"
                     android:spinnerMode="dropdown"
                     android:textAlignment="center"
                     android:textColor="#000"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv1"
                     android:layout_marginTop="20dp"
-                    android:text="Select Blood:"
                     android:drawableLeft="@drawable/ic_list_black_24dp"
-                    android:textColor="#fff"
-                    android:textSize="25sp" />
+                    android:text="Select Blood:"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
 
                 <Spinner
                     android:id="@+id/etBloodgroup"
@@ -191,14 +230,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_below="@+id/etGender"
-                    android:layout_marginLeft="200dp"
+                    android:layout_marginLeft="180dp"
                     android:layout_marginTop="10dp"
                     android:background="@android:drawable/btn_dropdown"
                     android:entries="@array/blood_group"
                     android:spinnerMode="dropdown"
                     android:textAlignment="center"
                     android:textColor="#000"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
             </RelativeLayout>
 
             <Button
@@ -209,13 +248,12 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/ic_button"
+                android:drawableLeft="@drawable/ic_touch_app_black_24dp"
                 android:paddingRight="20dp"
                 android:text="Register"
                 android:textAllCaps="false"
-                android:textColor="#000"
-                android:textSize="25sp"
-                android:drawableLeft="@drawable/ic_touch_app_black_24dp"
-                android:textStyle="bold" />
+                android:textColor="#FFF"
+                android:textSize="20sp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

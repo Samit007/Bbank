@@ -6,7 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
 import Adapter.ViewPagerAdapter;
 import Fragments.LoginPage;
@@ -15,7 +15,7 @@ import Fragments.RegisterPage;
 public class ViewPagerActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private Button btnSearch;
+    private TextView btnSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

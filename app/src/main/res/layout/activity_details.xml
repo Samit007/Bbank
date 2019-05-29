@@ -4,76 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroundwhite"
+    android:orientation="vertical"
     tools:context=".DetailsActivity"
-    android:orientation="vertical">
-
-    <!--<de.hdodenhof.circleimageview.CircleImageView-->
-        <!--android:id="@+id/imgProfile"-->
-        <!--android:layout_width="100dp"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:src="@drawable/noavatar" />-->
-
+    android:gravity="center">
     <TextView
         android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/textStyle"
+        android:drawableLeft="@drawable/ic_person_black_24dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_toEndOf="@+id/imgProfile"
-        android:hint="Contact name"
-        android:textSize="20sp" />
+        android:hint="Contact name" />
 
     <TextView
+        style="@style/textStyle"
+        android:drawableLeft="@drawable/ic_contacts_black_24dp"
         android:id="@+id/tvPhoneNo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
         android:layout_below="@+id/tvName"
-        android:layout_toEndOf="@+id/imgProfile"
-        android:hint="Phone no"
-        android:textSize="20sp" />
-    <TextView
-        android:id="@+id/tvEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:hint="Phone no" />
+
+    <TextView
+        style="@style/textStyle"
+        android:id="@+id/tvEmail"
+        android:drawableLeft="@drawable/ic_email_black_24dp"
         android:layout_below="@+id/tvPhoneNo"
-        android:layout_toEndOf="@+id/imgProfile"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:hint="Email Id"
-        android:textSize="20sp" />
+        />
+
     <TextView
         android:id="@+id/tvAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_home_black_24dp"
+        style="@style/textStyle"
         android:layout_below="@+id/tvEmail"
-        android:layout_toEndOf="@+id/imgProfile"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:hint="Address"
-        android:textSize="20sp" />
+        />
 
-<TextView
+    <TextView
         android:id="@+id/tvGender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_list_black_24dp"
+        style="@style/textStyle"
         android:layout_below="@+id/tvAddress"
-        android:layout_toEndOf="@+id/imgProfile"
-        android:hint="Gender"
-        android:textSize="20sp" />
-
-<TextView
-        android:id="@+id/tvBlood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:hint="Gender"
+        />
+
+    <TextView
+        android:id="@+id/tvBlood"
+        style="@style/textStyle"
         android:layout_below="@+id/tvGender"
-        android:layout_toEndOf="@+id/imgProfile"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:hint="Blood Group"
-        android:textSize="20sp" />
+        android:drawableLeft="@drawable/ic_blood"/>
 
 </RelativeLayout>

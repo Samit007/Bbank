@@ -4,32 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroundwhite"
+    android:orientation="vertical"
     tools:context=".ViewPagerActivity"
-    tools:showIn="@layout/activity_view_pager"
-    android:orientation="vertical">
+    tools:showIn="@layout/activity_view_pager">
 
-    <Button
-        android:id="@+id/btnSearch"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Search for Blood"
-        android:textSize="20sp" />
-
-
-    <android.support.design.widget.TabLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Search:"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:id="@+id/tv1"/>
+
+        <TextView
+            android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/tv1"
+            android:text="Click Here!"
+            android:textColor="#F80303"
+            android:textSize="20sp"
+            android:paddingLeft="10dp"/>
+        <View
+            android:layout_width="100dp"
+            android:layout_height="2dp"
+            android:background="#FF0000"
+            android:layout_below="@+id/btnSearch"
+            android:layout_toRightOf="@+id/tv1"
+            android:layout_marginLeft="10dp"/>
+    </RelativeLayout>
+
+    <android.support.design.widget.TabLayout
         android:id="@+id/tabId"
-        app:tabTextColor="#ffffff"
-        android:background="#1DAF6C"
-        android:layout_marginTop="20dp">
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="#4ABB77"
+        app:tabIndicatorColor="#FF0000"
+        app:tabIndicatorHeight="2dp"
+        app:tabTextColor="#ffffff">
     </android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/viewPager">
-    </android.support.v4.view.ViewPager>
+        android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
 </LinearLayout>

@@ -50,11 +50,15 @@ public class LoginPage extends Fragment  {
 
     private void checkUser() {
 
-        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("User",MODE_PRIVATE);
-        String username=sharedPreferences.getString("username","");
-        String password=sharedPreferences.getString("password","");
-        if(username.equals(etUsername.getText().toString())||
-                password.equals(etPassword.getText().toString())){
+//        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("User",MODE_PRIVATE);
+//        String username=sharedPreferences.getString("username","");
+//        String password=sharedPreferences.getString("password","");
+//        if(username.equals(etUsername.getText().toString())||
+//                password.equals(etPassword.getText().toString())){
+        String u=etUsername.getText().toString();
+        String p=etPassword.getText().toString();
+        if (u.equals("admin")&& p.equals("admin"))
+        {
             Intent intent = new Intent(getActivity(),Dashboard.class);
             startActivity(intent);
         }else{

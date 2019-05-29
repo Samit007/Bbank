@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +11,9 @@ import android.widget.TextView;
 
 import com.example.bloodbankmanagementsystem.DetailsActivity;
 import com.example.bloodbankmanagementsystem.R;
-import com.example.bloodbankmanagementsystem.User;
+import Model.User;
 
 import java.util.List;
-
-import Model.Details;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailsViewHolder> {
     Context mContext;
@@ -31,7 +27,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailsV
     @NonNull
     @Override
     public DetailsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.details, viewGroup, false);
+        View view=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user, viewGroup, false);
             return new DetailsViewHolder(view);
         }
 
