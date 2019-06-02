@@ -1,18 +1,24 @@
 package Fragments;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.support.v4.content.CursorLoader;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,13 +29,20 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.bloodbankmanagementsystem.ImageResponse;
 import com.example.bloodbankmanagementsystem.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import Helper.MyHelper;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
@@ -38,7 +51,8 @@ public class RegisterPage extends Fragment {
     private EditText etFullname, etPhoneNo, etEmail, etAddres, etUsername, etPassword, etPassword2;
     private Spinner etGender, etBloodGroup;
     private Button btnRegister, btnReset;
-    private ImageView btnImage, btnPhoto;
+    private ImageView btnImage;
+    private String imagePath, imageName;
     Bitmap bitmap;
     View view;
     ByteArrayOutputStream byteArrayOutputStream;
@@ -64,7 +78,6 @@ public class RegisterPage extends Fragment {
         etBloodGroup = view.findViewById(R.id.etBloodgroup);
         btnRegister = view.findViewById(R.id.btnRegister);
         btnImage = view.findViewById(R.id.btnImg);
-        btnPhoto = view.findViewById(R.id.btnPhoto);
         byteArrayOutputStream = new ByteArrayOutputStream();
         checkPermission();
 
@@ -110,6 +123,12 @@ public class RegisterPage extends Fragment {
 
             }
         });
+        btnImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BrowseImage();
+            }
+        });
 
         return view;
     }
@@ -148,10 +167,10 @@ public class RegisterPage extends Fragment {
     }
 
 
-    private void loadCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        startActivityForResult(intent, 1);
+    private void BrowseImage() {
+            Intent i = new Intent(Intent.ACTION_PICK);
+            i.setType("image/*");
+            startActivityForResult(i,0);
     }
 
 
@@ -165,49 +184,80 @@ public class RegisterPage extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            btnImage.setImageBitmap(imageBitmap);
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 60, byteArrayOutputStream);
-
-            file = new File(Environment.getExternalStorageDirectory() + "DCIM/BloodBank/SampleImage.png");
-
-            try {
-                file.createNewFile();
-
-                fileOutputStream = new FileOutputStream(file);
-
-                fileOutputStream.write(byteArrayOutputStream.toByteArray());
-
-                fileOutputStream.close();
-
-            } catch (Exception e) {
-
-                e.printStackTrace();
-
+        if(resultCode == RESULT_OK){
+            if(data == null){
+                Toast.makeText(this, "Please Select An Image", Toast.LENGTH_SHORT).show();
             }
-
-            Toast.makeText(getActivity(), "Image Saved Successfully", Toast.LENGTH_LONG).show();
-
+        }
+        Uri uri = data.getData();
+        imagePath = getRealPathFromUri(uri);
+        previewImage(imagePath);
+    }
+    private String getRealPathFromUri(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(getApplicationContext(), uri,
+                projection,null,null,null);
+        Cursor cursor = loader.loadInBackground();
+        int colIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(colIndex);
+        cursor.close();
+        return result;
+    }
+    private void previewImage(String ivImag) {
+        File imgFile = new File(ivImag);
+        if(imgFile.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            btnImage.setImageBitmap(myBitmap);
         }
     }
+    private void StrictMode(){
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+    }
+
+    private void SaveImageOnly() {
+        File file = new File(imagePath);
+
+        RequestBody requestBody = RequestBody.create
+                (MediaType.parse("multipart/form-data"),file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData
+                ("imageFile", file.getName(), requestBody);
+        ClothesApi clothesApi = Url.getInstance().create(ClothesApi.class);
+        Call<ImageResponse> responseCall = clothesApi.uploadImage(body);
+
+        StrictMode();
+        try{
+            Response<ImageResponse> imageResponseResponse = responseCall.execute();
+            imageName = imageResponseResponse.body().getFilename();
+        }catch (IOException e){
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+//    private void SaveItem() {
+//
+//        SaveImageOnly();
+//        ClothesApi clothesApi = Url.getInstance().create(ClothesApi.class);
+//        String itemName = etItemName.getText().toString();
+//        String itemPrice = etItemPrice.getText().toString();
+//        String itemDescription = etItemDescription.getText().toString();
+//        String itemImageName = imageName;
+//
+//        Clothes clothes = new Clothes(itemName,itemPrice,itemDescription,itemImageName);
+//        Call<Void> listCall = clothesApi.addItems(clothes);
+//
+//        listCall.enqueue(new Callback<Void>() {
+//            @Override
+//            public void onResponse(Call<Void> call, Response<Void> response) {
+//                Toast.makeText(AddItem.this, "Added Item Successfully", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Void> call, Throwable t) {
+//                Toast.makeText(AddItem.this, "Item Not Added", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 }
-
-//        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("User", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//
-//        editor.putString("username", etUsername.getText().toString());
-//        editor.putString("password", etPassword.getText().toString());
-//        editor.putString("name", etFullname.getText().toString());
-//        editor.putString("phone", etPhoneNo.getText().toString());
-//        editor.putString("email", etEmail.getText().toString());
-//        editor.putString("address", etAddres.getText().toString());
-//        editor.putString("gender", etGender.getSelectedItem().toString());
-//        editor.putString("blood", etBloodGroup.getSelectedItem().toString());
-//
-//        editor.commit();
-//
-//        Toast.makeText(getActivity(), "Successfully registered", Toast.LENGTH_SHORT).show();
-
-
