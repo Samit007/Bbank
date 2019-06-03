@@ -79,12 +79,6 @@ public class RegisterPage extends Fragment {
         btnRegister = view.findViewById(R.id.btnRegister);
         btnImage = view.findViewById(R.id.btnImg);
         byteArrayOutputStream = new ByteArrayOutputStream();
-        checkPermission();
-
-        final MyHelper myHelper = new MyHelper(getActivity());
-        final SQLiteDatabase sqLiteDatabase = myHelper.getWritableDatabase();
-
-
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,26 +95,10 @@ public class RegisterPage extends Fragment {
                 String pass = etPassword.getText().toString();
                 String pass2 = etPassword.getText().toString();
                 if (pass.equals(pass2)) {
-                    SignUp();
+                    Toast.makeText(getActivity(), "success", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "wrong username or password", Toast.LENGTH_SHORT).show();
                 }
-
-            }
-
-
-            private void SignUp() {
-                long id = myHelper.InsertData(etFullname.getText().toString(),etUsername.getText().toString()
-                        ,etPassword.getText().toString(),etEmail.getText().toString(),
-                        etPhoneNo.getText().toString(), etAddres.getText().toString(),etGender.getSelectedItem().toString(),
-                        etBloodGroup.getSelectedItem().toString(), sqLiteDatabase);
-                if (id>0){
-                    Toast.makeText(getActivity(), "Successfully registered", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-                }
-
             }
         });
         btnImage.setOnClickListener(new View.OnClickListener() {
@@ -129,9 +107,51 @@ public class RegisterPage extends Fragment {
                 BrowseImage();
             }
         });
-
         return view;
     }
+            private void BrowseImage(){
+                Intent i = new Intent(Intent.ACTION_PICK);
+                i.setType("image/*");
+                startActivityForResult(i,0);
+            }
+
+            @Override
+            public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+                super.onActivityResult(requestCode, resultCode, data);
+                if(resultCode == RESULT_OK){
+                    if(data == null){
+                        Toast.makeText(getActivity(), "Select an image", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                Uri uri = data.getData();
+                imagePath = getRealPathFromUri(uri);
+                previewImage(imagePath);
+    }
+
+    private String getRealPathFromUri(Uri uri) {
+            String[] projection = {MediaStore.Images.Media.DATA};
+            CursorLoader loader = new CursorLoader(getContext(), uri,
+                    projection,null,null,null);
+            Cursor cursor = loader.loadInBackground();
+            int colIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            String result = cursor.getString(colIndex);
+            cursor.close();
+            return result;
+    }
+    private void previewImage(String ivImag) {
+        File imgFile = new File(ivImag);
+        if(imgFile.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            btnImage.setImageBitmap(myBitmap);
+        }
+    }
+    private void StrictMode(){
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+    }
+
+
 
     private boolean isEmpty() {
         if (TextUtils.isEmpty((etFullname.getText().toString()))) {
@@ -165,99 +185,4 @@ public class RegisterPage extends Fragment {
         }
         return false;
     }
-
-
-    private void BrowseImage() {
-            Intent i = new Intent(Intent.ACTION_PICK);
-            i.setType("image/*");
-            startActivityForResult(i,0);
-    }
-
-
-    private void checkPermission() {
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{
-                    Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
-            }, 0);
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(resultCode == RESULT_OK){
-            if(data == null){
-                Toast.makeText(this, "Please Select An Image", Toast.LENGTH_SHORT).show();
-            }
-        }
-        Uri uri = data.getData();
-        imagePath = getRealPathFromUri(uri);
-        previewImage(imagePath);
-    }
-    private String getRealPathFromUri(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        CursorLoader loader = new CursorLoader(getApplicationContext(), uri,
-                projection,null,null,null);
-        Cursor cursor = loader.loadInBackground();
-        int colIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String result = cursor.getString(colIndex);
-        cursor.close();
-        return result;
-    }
-    private void previewImage(String ivImag) {
-        File imgFile = new File(ivImag);
-        if(imgFile.exists()){
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            btnImage.setImageBitmap(myBitmap);
-        }
-    }
-    private void StrictMode(){
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-    }
-
-    private void SaveImageOnly() {
-        File file = new File(imagePath);
-
-        RequestBody requestBody = RequestBody.create
-                (MediaType.parse("multipart/form-data"),file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData
-                ("imageFile", file.getName(), requestBody);
-        ClothesApi clothesApi = Url.getInstance().create(ClothesApi.class);
-        Call<ImageResponse> responseCall = clothesApi.uploadImage(body);
-
-        StrictMode();
-        try{
-            Response<ImageResponse> imageResponseResponse = responseCall.execute();
-            imageName = imageResponseResponse.body().getFilename();
-        }catch (IOException e){
-            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
-
-//    private void SaveItem() {
-//
-//        SaveImageOnly();
-//        ClothesApi clothesApi = Url.getInstance().create(ClothesApi.class);
-//        String itemName = etItemName.getText().toString();
-//        String itemPrice = etItemPrice.getText().toString();
-//        String itemDescription = etItemDescription.getText().toString();
-//        String itemImageName = imageName;
-//
-//        Clothes clothes = new Clothes(itemName,itemPrice,itemDescription,itemImageName);
-//        Call<Void> listCall = clothesApi.addItems(clothes);
-//
-//        listCall.enqueue(new Callback<Void>() {
-//            @Override
-//            public void onResponse(Call<Void> call, Response<Void> response) {
-//                Toast.makeText(AddItem.this, "Added Item Successfully", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Void> call, Throwable t) {
-//                Toast.makeText(AddItem.this, "Item Not Added", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 }
