@@ -20,6 +20,7 @@ import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.support.v4.content.CursorLoader;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import Helper.MyHelper;
 import okhttp3.MediaType;
@@ -46,6 +48,7 @@ import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
+import static android.os.ParcelFileDescriptor.MODE_APPEND;
 
 public class RegisterPage extends Fragment {
     private EditText etFullname, etPhoneNo, etEmail, etAddres, etUsername, etPassword, etPassword2;
@@ -88,16 +91,18 @@ public class RegisterPage extends Fragment {
                 if (!isEmpty()) {
                     login();
                 }
-
             }
+
+
 
             private void login() {
                 String pass = etPassword.getText().toString();
                 String pass2 = etPassword.getText().toString();
                 if (pass.equals(pass2)) {
-                    Toast.makeText(getActivity(), "success", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "wrong username or password", Toast.LENGTH_SHORT).show();
+                    SaveUser();
+//                    Toast.makeText(getActivity(), "success", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Toast.makeText(getActivity(), "wrong username or password", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -109,7 +114,32 @@ public class RegisterPage extends Fragment {
         });
         return view;
     }
-            private void BrowseImage(){
+    private void SaveUser(){
+//        String fname="fullname";
+//        String lname="username";
+//        String password="password";
+//        String phone="phoneNo";
+//        String email="email";
+//        String address="address";
+//        String gender="gender";
+//        String blood="blood";
+
+        try{
+            PrintStream printStream=new PrintStream(getActivity().openFileOutput("users.txt",MODE_PRIVATE | Context.MODE_APPEND));
+            printStream.println(etFullname.getText().toString()+"->"+etUsername.getText().toString()+"->"+etPassword.getText().toString()+"->"
+                    +etEmail.getText().toString()+"->"+etPhoneNo.getText().toString()+"->"+etAddres.getText().toString()+"->"
+                    + etGender.getSelectedItem().toString()+"->"+etBloodGroup.getSelectedItem().toString());
+
+            Toast.makeText(getActivity(),"Saved to"+getActivity().getFilesDir(),Toast.LENGTH_SHORT).show();
+
+        }catch (IOException e){
+            Log.d("Blood bank","Error: "+e.toString());
+            e.printStackTrace();
+        }
+    }
+
+
+    private void BrowseImage(){
                 Intent i = new Intent(Intent.ACTION_PICK);
                 i.setType("image/*");
                 startActivityForResult(i,0);
