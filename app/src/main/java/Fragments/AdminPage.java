@@ -1,9 +1,6 @@
 package Fragments;
 
-
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -14,21 +11,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.bloodbankmanagementsystem.AdminDashboard;
 import com.example.bloodbankmanagementsystem.Dashboard;
 import com.example.bloodbankmanagementsystem.R;
 
-import static android.content.Context.MODE_PRIVATE;
-
-public class LoginPage extends Fragment  {
+public class AdminPage extends Fragment {
     private EditText etUsername, etPassword;
     private Button btnLogin;
     private TextView tvIncorrect;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.activity_login_page, container, false);
+
+        final View view = inflater.inflate(R.layout.activity_admin_page, container, false);
         etUsername = view.findViewById(R.id.etUsernamelogin);
         etPassword = view.findViewById(R.id.etPasswordlogin);
         tvIncorrect = view.findViewById(R.id.tvIncorrect);
@@ -37,7 +33,7 @@ public class LoginPage extends Fragment  {
             @Override
             public void onClick(View v) {
                 if (!isEmpty()) {
-                checkUser();
+                    checkUser();
                 }
             }
         });
@@ -51,13 +47,12 @@ public class LoginPage extends Fragment  {
 //        String password=sharedPreferences.getString("password","");
 //        if(username.equals(etUsername.getText().toString())||
 //                password.equals(etPassword.getText().toString())){
-        String u=etUsername.getText().toString();
-        String p=etPassword.getText().toString();
-        if (u.equals("admin")&& p.equals("admin"))
-        {
-            Intent intent = new Intent(getActivity(),Dashboard.class);
+        String u = etUsername.getText().toString();
+        String p = etPassword.getText().toString();
+        if (u.equals("admin") && p.equals("admin")) {
+            Intent intent = new Intent(getActivity(), AdminDashboard.class);
             startActivity(intent);
-        }else{
+        } else {
             tvIncorrect.setText("incorrect username or password");
             tvIncorrect.setError("");
             tvIncorrect.requestFocus();
@@ -78,3 +73,6 @@ public class LoginPage extends Fragment  {
         return false;
     }
 }
+
+
+

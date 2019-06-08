@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import Adapter.ViewPagerAdapter;
+import Fragments.AdminPage;
 import Fragments.LoginPage;
 import Fragments.RegisterPage;
 
@@ -36,6 +37,7 @@ public class ViewPagerActivity extends AppCompatActivity {
 
         adapter.LoginPage(new LoginPage(),"Sign In");
         adapter.LoginPage(new RegisterPage(),"Sign up");
+        adapter.LoginPage(new AdminPage(),"Admin");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
