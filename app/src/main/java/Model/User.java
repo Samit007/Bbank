@@ -1,35 +1,35 @@
 package Model;
 
 public class User {
-    private int UserID;
-    private String Fullname,Username,Password,Email,PhoneNo,Address,Gender,Blood;
+    private String Firstname,Lastname,Username,Password,Email,PhoneNo,Address,Gender,blood_group,date_of_birth;
 
-    public User(int userID, String fullname, String username, String password, String email, String phoneNo, String address, String gender, String blood) {
-        UserID = userID;
-        Fullname = fullname;
+    public User(String firstname, String lastname, String username, String password, String email, String phoneNo, String address, String gender, String blood_group, String date_of_birth) {
+        Firstname = firstname;
+        Lastname = lastname;
         Username = username;
         Password = password;
         Email = email;
         PhoneNo = phoneNo;
         Address = address;
         Gender = gender;
-        Blood = blood;
+        this.blood_group = blood_group;
+        this.date_of_birth = date_of_birth;
     }
 
-    public int getUserID() {
-        return UserID;
+    public String getFirstname() {
+        return Firstname;
     }
 
-    public void setUserID(int userID) {
-        UserID = userID;
+    public void setFirstname(String firstname) {
+        Firstname = firstname;
     }
 
-    public String getFullname() {
-        return Fullname;
+    public String getLastname() {
+        return Lastname;
     }
 
-    public void setFullname(String fullname) {
-        Fullname = fullname;
+    public void setLastname(String lastname) {
+        Lastname = lastname;
     }
 
     public String getUsername() {
@@ -80,11 +80,19 @@ public class User {
         Gender = gender;
     }
 
-    public String getBlood() {
-        return Blood;
+    public String getBlood_group() {
+        return blood_group;
     }
 
-    public void setBlood(String blood) {
-        Blood = blood;
+    public void setBlood_group(String blood_group) {
+        this.blood_group = blood_group;
+    }
+
+    public String getDate_of_birth() {
+        return date_of_birth;
+    }
+
+    public void setDate_of_birth(String date_of_birth) {
+        this.date_of_birth = date_of_birth;
     }
 }

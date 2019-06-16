@@ -25,7 +25,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:paddingRight="10dp"
             android:text="Create an"
             android:textColor="#000"
@@ -36,7 +35,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:text="Account"
             android:textColor="#FF0000"
             android:textSize="20sp"
@@ -45,7 +43,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:paddingLeft="10dp"
             android:text="Here!"
             android:textColor="#000"
@@ -76,17 +73,28 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
                     android:background="@drawable/ic_image_black_24dp"
                     android:backgroundTint="@color/cardview_shadow_start_color" />
             </RelativeLayout>
 
-
             <EditText
-                android:id="@+id/etFullname"
+                android:id="@+id/etFirstname"
                 style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_person_black_24dp"
-                android:hint="Enter Fullname"
+                android:hint="Enter Firstname"
+                android:maxLines="1" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="35dp"
+                android:background="#CF8086" />
+
+            <EditText
+                android:id="@+id/etLastname"
+                style="@style/textStyle1"
+                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:hint="Enter Lastname"
                 android:maxLines="1" />
 
             <View
@@ -169,6 +177,19 @@
                 style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_home_black_24dp"
                 android:hint="Enter Address"
+                android:maxLines="1" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="35dp"
+                android:background="#CF8086" />
+
+            <TextView
+                android:id="@+id/etDOB"
+                style="@style/textStyle1"
+                android:drawableLeft="@drawable/ic_home_black_24dp"
+                android:hint="Enter Date of birth"
                 android:maxLines="1" />
 
             <View

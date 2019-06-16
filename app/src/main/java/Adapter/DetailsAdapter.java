@@ -34,22 +34,21 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailsV
     @Override
     public void onBindViewHolder(@NonNull DetailsViewHolder detailsViewHolder, int i) {
         final User user=userList.get(i);
-        detailsViewHolder.tvName.setText(user.getFullname());
-        detailsViewHolder.tvBlood.setText(user.getBlood());
+        detailsViewHolder.tvName.setText(user.getFirstname());
+        detailsViewHolder.tvBlood.setText(user.getBlood_group());
 
         detailsViewHolder.tvName.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext,DetailsActivity.class);
-                //intent.putExtra("image",details.getImageId());
-                intent.putExtra("fullname",user.getFullname());
+                intent.putExtra("firstname",user.getFirstname());
+                intent.putExtra("lasttname",user.getLastname());
                 intent.putExtra("phoneNo",user.getPhoneNo());
                 intent.putExtra("email",user.getEmail());
                 intent.putExtra("address",user.getAddress());
                 intent.putExtra("gender",user.getGender());
-                intent.putExtra("blood",user.getBlood());
-
+                intent.putExtra("blood",user.getBlood_group());
                 mContext.startActivity(intent);
 
             }

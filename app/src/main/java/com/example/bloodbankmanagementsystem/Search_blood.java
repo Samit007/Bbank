@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Adapter.DetailsAdapter;
-import Helper.MyHelper;
 import Model.User;
 
 public class Search_blood extends AppCompatActivity {
@@ -24,23 +23,9 @@ public class Search_blood extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_blood);
 
-//        etsearchbyblood=findViewById(R.id.searchbyblood);
-//        btnsearchbyblood=findViewById(R.id.btnsearchbyblood);
-//        btnsearchbyblood.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-
         recyclerView=findViewById(R.id.recyclerview);
-        final MyHelper myHelper=new MyHelper(this);
-        final SQLiteDatabase sqLiteDatabase=myHelper.getWritableDatabase();
-
         //create list of details
         List<User> userList = new ArrayList<>();
-        userList=myHelper.GetAllUsers(sqLiteDatabase);
-
         DetailsAdapter detailsAdapter=new DetailsAdapter(this,userList);
         recyclerView.setAdapter(detailsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

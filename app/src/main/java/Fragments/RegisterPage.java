@@ -1,59 +1,50 @@
 package Fragments;
 
-import android.Manifest;
-import android.content.Context;
+import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.os.Bundle;
 import android.support.v4.content.CursorLoader;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bloodbankmanagementsystem.ImageResponse;
 import com.example.bloodbankmanagementsystem.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.util.Calendar;
 
-import Helper.MyHelper;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
+import Api.UserApi;
+import Model.User;
+import Url.Url;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
-import static android.content.Context.MODE_PRIVATE;
-import static android.os.ParcelFileDescriptor.MODE_APPEND;
 
-public class RegisterPage extends Fragment {
-    private EditText etFullname, etPhoneNo, etEmail, etAddres, etUsername, etPassword, etPassword2;
+public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSetListener {
+    private EditText etFirstname,etLastname, etPhoneNo, etEmail, etAddres, etUsername, etPassword, etPassword2;
+    private TextView etDOB;
     private Spinner etGender, etBloodGroup;
-    private Button btnRegister, btnReset;
+    private Button btnRegister;
     private ImageView btnImage;
     private String imagePath, imageName;
     Bitmap bitmap;
@@ -70,7 +61,8 @@ public class RegisterPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_register_page, container, false);
-        etFullname = view.findViewById(R.id.etFullname);
+        etFirstname = view.findViewById(R.id.etFirstname);
+        etLastname = view.findViewById(R.id.etLastname);
         etUsername = view.findViewById(R.id.etUsername);
         etPassword = view.findViewById(R.id.etPassword);
         etPassword2 = view.findViewById(R.id.etPassword2);
@@ -78,16 +70,28 @@ public class RegisterPage extends Fragment {
         etEmail = view.findViewById(R.id.etEmail);
         etAddres = view.findViewById(R.id.etAddress);
         etGender = view.findViewById(R.id.etGender);
+        etDOB = view.findViewById(R.id.etDOB);
         etBloodGroup = view.findViewById(R.id.etBloodgroup);
         btnRegister = view.findViewById(R.id.btnRegister);
         btnImage = view.findViewById(R.id.btnImg);
         byteArrayOutputStream = new ByteArrayOutputStream();
 
+        etDOB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        getActivity(), RegisterPage.this, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String pass = etPassword.getText().toString();
-                String pass2 = etPassword.getText().toString();
                 if (!isEmpty()) {
                     login();
                 }
@@ -100,10 +104,7 @@ public class RegisterPage extends Fragment {
                 String pass2 = etPassword.getText().toString();
                 if (pass.equals(pass2)) {
                     SaveUser();
-//                    Toast.makeText(getActivity(), "success", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(getActivity(), "wrong username or password", Toast.LENGTH_SHORT).show();
-                }
+              }
             }
         });
         btnImage.setOnClickListener(new View.OnClickListener() {
@@ -114,60 +115,36 @@ public class RegisterPage extends Fragment {
         });
         return view;
     }
-    private void SaveUser(){
-//        String fname="fullname";
-//        String lname="username";
-//        String password="password";
-//        String phone="phoneNo";
-//        String email="email";
-//        String address="address";
-//        String gender="gender";
-//        String blood="blood";
-
-        try{
-            PrintStream printStream=new PrintStream(getActivity().openFileOutput("users.txt",MODE_PRIVATE | Context.MODE_APPEND));
-            printStream.println(etFullname.getText().toString()+"->"+etUsername.getText().toString()+"->"+etPassword.getText().toString()+"->"
-                    +etEmail.getText().toString()+"->"+etPhoneNo.getText().toString()+"->"+etAddres.getText().toString()+"->"
-                    + etGender.getSelectedItem().toString()+"->"+etBloodGroup.getSelectedItem().toString());
-
-            Toast.makeText(getActivity(),"Saved to"+getActivity().getFilesDir(),Toast.LENGTH_SHORT).show();
-
-        }catch (IOException e){
-            Log.d("Blood bank","Error: "+e.toString());
-            e.printStackTrace();
-        }
-    }
-
 
     private void BrowseImage(){
-                Intent i = new Intent(Intent.ACTION_PICK);
-                i.setType("image/*");
-                startActivityForResult(i,0);
-            }
+        Intent i = new Intent(Intent.ACTION_PICK);
+        i.setType("image/*");
+        startActivityForResult(i,0);
+    }
 
-            @Override
-            public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-                super.onActivityResult(requestCode, resultCode, data);
-                if(resultCode == RESULT_OK){
-                    if(data == null){
-                        Toast.makeText(getActivity(), "Select an image", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                Uri uri = data.getData();
-                imagePath = getRealPathFromUri(uri);
-                previewImage(imagePath);
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            if(data == null){
+                Toast.makeText(getActivity(), "Select an image", Toast.LENGTH_SHORT).show();
+            }
+        }
+        Uri uri = data.getData();
+        imagePath = getRealPathFromUri(uri);
+        previewImage(imagePath);
     }
 
     private String getRealPathFromUri(Uri uri) {
-            String[] projection = {MediaStore.Images.Media.DATA};
-            CursorLoader loader = new CursorLoader(getContext(), uri,
-                    projection,null,null,null);
-            Cursor cursor = loader.loadInBackground();
-            int colIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            String result = cursor.getString(colIndex);
-            cursor.close();
-            return result;
+        String[] projection = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(getContext(), uri,
+                projection,null,null,null);
+        Cursor cursor = loader.loadInBackground();
+        int colIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(colIndex);
+        cursor.close();
+        return result;
     }
     private void previewImage(String ivImag) {
         File imgFile = new File(ivImag);
@@ -182,11 +159,44 @@ public class RegisterPage extends Fragment {
     }
 
 
+    private void SaveUser(){
+
+        UserApi userApi= Url.getInstance().create(UserApi.class);
+        String Firstname = etFirstname.getText().toString();
+        String Lastname = etLastname.getText().toString();
+        String Username = etUsername.getText().toString();
+        String Password = etPassword.getText().toString();
+        String Email = etEmail.getText().toString();
+        String phone = etPhoneNo.getText().toString();
+        String Address = etAddres.getText().toString();
+        String date_of_birth = etDOB.getText().toString();
+        String Gender = etGender.getSelectedItem().toString();
+        String blood_group = etBloodGroup.getSelectedItem().toString();
+
+        User user= new User(Firstname,Lastname,Username,Password,Email,phone,Address,Gender,blood_group,date_of_birth);
+        Call<Void> listCall = userApi.addUsers(user);
+
+        listCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getActivity(), "User Not Registered", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     private boolean isEmpty() {
-        if (TextUtils.isEmpty((etFullname.getText().toString()))) {
-            etFullname.setError("Please enter Name");
-            etFullname.requestFocus();
+        if (TextUtils.isEmpty((etFirstname.getText().toString()))) {
+            etFirstname.setError("Please enter First Name");
+            etFirstname.requestFocus();
+            return true;
+        } else if (TextUtils.isEmpty((etLastname.getText().toString()))) {
+            etLastname.setError("Please enter Last Name");
+            etLastname.requestFocus();
             return true;
         } else if (TextUtils.isEmpty((etUsername.getText().toString()))) {
             etUsername.setError("Please enter Username");
@@ -214,5 +224,50 @@ public class RegisterPage extends Fragment {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        String mon = "";
+        switch (month) {
+            case 0:
+                mon = "jan";
+                break;
+            case 1:
+                mon = "feb";
+                break;
+            case 2:
+                mon = "mar";
+                break;
+            case 3:
+                mon = "Apr";
+                break;
+            case 4:
+                mon = "May";
+                break;
+            case 5:
+                mon = "Jun";
+                break;
+            case 6:
+                mon = "Jul";
+                break;
+            case 7:
+                mon = "Aug";
+                break;
+            case 8:
+                mon = "Sep";
+                break;
+            case 9:
+                mon = "Oct";
+                break;
+            case 10:
+                mon = "Nov";
+                break;
+            case 11:
+                mon = "Dec";
+                break;
+        }
+        String date = "" + mon + "," + dayOfMonth + "-" + year;
+        etDOB.setText(date);
     }
 }
