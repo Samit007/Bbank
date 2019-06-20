@@ -62,16 +62,12 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailsV
 
     public class DetailsViewHolder extends RecyclerView.ViewHolder {
         //CircleImageView imgProfile;
-        TextView tvName,tvPhoneNo,tvEmail,tvAddress,tvGender,tvBlood;
+        TextView tvName,tvBlood;
         public DetailsViewHolder(@NonNull View itemView) {
             super(itemView);
           //  imgProfile=itemView.findViewById(R.id.imgProfile);
             tvName=itemView.findViewById(R.id.tvName);
-//            tvPhoneNo=itemView.findViewById(R.id.tvPhoneNo);
-//            tvEmail=itemView.findViewById(R.id.tvEmail);
-//            tvAddress=itemView.findViewById(R.id.tvAddress);
-//            tvGender=itemView.findViewById(R.id.tvGender);
-            tvBlood=itemView.findViewById(R.id.tvBlood);
+           tvBlood=itemView.findViewById(R.id.tvBlood);
         }
 
         }

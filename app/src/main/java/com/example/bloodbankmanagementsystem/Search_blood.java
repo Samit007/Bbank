@@ -1,19 +1,26 @@
 package com.example.bloodbankmanagementsystem;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import Adapter.DetailsAdapter;
+import Api.UserApi;
 import Model.User;
-
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import Url.Url;
 public class Search_blood extends AppCompatActivity {
     private RecyclerView recyclerView;
     private EditText etsearchbyblood;
@@ -24,11 +31,37 @@ public class Search_blood extends AppCompatActivity {
         setContentView(R.layout.activity_search_blood);
 
         recyclerView=findViewById(R.id.recyclerview);
+
+        showUsers();
         //create list of details
-        List<User> userList = new ArrayList<>();
-        DetailsAdapter detailsAdapter=new DetailsAdapter(this,userList);
-        recyclerView.setAdapter(detailsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        List<User> userList = new ArrayList<>();
+//        DetailsAdapter detailsAdapter=new DetailsAdapter(this,userList);
+//        recyclerView.setAdapter(detailsAdapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void showUsers() {
+        Retrofit retrofit = Url.getInstance();
+        UserApi userApi=retrofit.create(UserApi.class);
+
+        Call<List<User>> listCall=userApi.getUsers();
+
+        listCall.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (response.body() != null) {
+                    List<User> users = response.body();
+                    DetailsAdapter detailsAdapter = new DetailsAdapter(Search_blood.this, users);
+                    recyclerView.setAdapter(detailsAdapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(Search_blood.this));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Toast.makeText(Search_blood.this, "Can't load Users", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
 
