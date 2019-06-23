@@ -162,18 +162,18 @@ public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSet
     private void SaveUser(){
 
         UserApi userApi= Url.getInstance().create(UserApi.class);
-        String Firstname = etFirstname.getText().toString();
-        String Lastname = etLastname.getText().toString();
-        String Username = etUsername.getText().toString();
-        String Password = etPassword.getText().toString();
-        String Email = etEmail.getText().toString();
+        String firstname = etFirstname.getText().toString();
+        String lastname = etLastname.getText().toString();
+        String username = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
+        String email = etEmail.getText().toString();
         String phone = etPhoneNo.getText().toString();
-        String Address = etAddres.getText().toString();
+        String address = etAddres.getText().toString();
         String date_of_birth = etDOB.getText().toString();
-        String Gender = etGender.getSelectedItem().toString();
+        String gender = etGender.getSelectedItem().toString();
         String blood_group = etBloodGroup.getSelectedItem().toString();
 
-        User user= new User(Firstname,Lastname,Username,Password,Email,phone,Address,Gender,blood_group,date_of_birth);
+        User user= new User(firstname,lastname,username,password,email,phone,address,gender,blood_group,date_of_birth);
         Call<Void> listCall = userApi.addUsers(user);
 
         listCall.enqueue(new Callback<Void>() {
@@ -184,7 +184,7 @@ public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSet
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(getActivity(), "User Not Registered", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "User Not Registered"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

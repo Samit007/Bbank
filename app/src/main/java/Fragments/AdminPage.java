@@ -10,13 +10,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bloodbankmanagementsystem.AdminDashboard;
 import com.example.bloodbankmanagementsystem.Dashboard;
 import com.example.bloodbankmanagementsystem.R;
 
+import java.util.List;
+
+import Api.AdminApi;
+import Model.Admin;
+import Url.Url;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AdminPage extends Fragment {
-    private EditText etUsername, etPassword;
+    private EditText etPasswordAdmin, etUsernameAdmin;
     private Button btnLogin;
     private TextView tvIncorrect;
 
@@ -25,8 +35,8 @@ public class AdminPage extends Fragment {
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.activity_admin_page, container, false);
-        etUsername = view.findViewById(R.id.etUsernamelogin);
-        etPassword = view.findViewById(R.id.etPasswordlogin);
+        etUsernameAdmin = view.findViewById(R.id.etUsernameloginAdmin);
+        etPasswordAdmin = view.findViewById(R.id.etPasswordloginAdmin);
         tvIncorrect = view.findViewById(R.id.tvIncorrect);
         btnLogin = view.findViewById(R.id.btnlogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -42,32 +52,44 @@ public class AdminPage extends Fragment {
 
     private void checkUser() {
 
-//        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("User",MODE_PRIVATE);
-//        String username=sharedPreferences.getString("username","");
-//        String password=sharedPreferences.getString("password","");
-//        if(username.equals(etUsername.getText().toString())||
-//                password.equals(etPassword.getText().toString())){
-        String u = etUsername.getText().toString();
-        String p = etPassword.getText().toString();
-        if (u.equals("admin") && p.equals("admin")) {
-            Intent intent = new Intent(getActivity(), AdminDashboard.class);
-            startActivity(intent);
-        } else {
-            tvIncorrect.setText("incorrect username or password");
-            tvIncorrect.setError("");
-            tvIncorrect.requestFocus();
-            return;
-        }
+        final String uname = etUsernameAdmin.getText().toString();
+        final String pass = etPasswordAdmin.getText().toString();
+        AdminApi adminApi = Url.getInstance().create(AdminApi.class);
+        Call<List<Admin>> listCall = adminApi.getAdmin();
+
+        listCall.enqueue(new Callback<List<Admin>>() {
+            @Override
+            public void onResponse(Call<List<Admin>> call, Response<List<Admin>> response) {
+                List<Admin> adminList =response.body();
+                for (Admin admin:adminList){
+                    String Auname = admin.getAdminUsername();
+                    String Apass = admin.getAdminPassword();
+
+                    if (uname.equals(Auname)&& pass.equals(Apass)){
+                        Toast.makeText(getActivity(), "Welcome Admin", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(),AdminDashboard.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Admin>> call, Throwable t) {
+                Toast.makeText(getActivity(), "login Unsuccessfull", Toast.LENGTH_SHORT).show();
+                tvIncorrect.setText("Incorrect Username or password");
+            }
+        });
     }
 
     private boolean isEmpty() {
-        if (TextUtils.isEmpty((etUsername.getText().toString()))) {
-            etUsername.setError("Please enter Username");
-            etUsername.requestFocus();
+        if (TextUtils.isEmpty((etUsernameAdmin.getText().toString()))) {
+            etUsernameAdmin.setError("Please enter Username");
+            etUsernameAdmin.requestFocus();
             return true;
-        } else if (TextUtils.isEmpty((etPassword.getText().toString()))) {
-            etPassword.setError("Please enter Password");
-            etPassword.requestFocus();
+        } else if (TextUtils.isEmpty((etPasswordAdmin.getText().toString()))) {
+            etPasswordAdmin.setError("Please enter Password");
+            etPasswordAdmin.requestFocus();
             return true;
         }
         return false;

@@ -44,7 +44,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailsV
                 Intent intent = new Intent(mContext,DetailsActivity.class);
                 intent.putExtra("firstname",user.getFirstname());
                 intent.putExtra("lasttname",user.getLastname());
-                intent.putExtra("phoneNo",user.getPhoneNo());
+                intent.putExtra("phoneNo",user.getPhone());
                 intent.putExtra("email",user.getEmail());
                 intent.putExtra("address",user.getAddress());
                 intent.putExtra("gender",user.getGender());

@@ -1,83 +1,83 @@
 package Model;
 
 public class User {
-    private String Firstname,Lastname,Username,Password,Email,PhoneNo,Address,Gender,blood_group,date_of_birth;
+    private String firstname,lastname,username,password,email,phone,address,gender,blood_group,date_of_birth;
 
-    public User(String firstname, String lastname, String username, String password, String email, String phoneNo, String address, String gender, String blood_group, String date_of_birth) {
-        Firstname = firstname;
-        Lastname = lastname;
-        Username = username;
-        Password = password;
-        Email = email;
-        PhoneNo = phoneNo;
-        Address = address;
-        Gender = gender;
+    public User(String firstname, String lastname, String username, String password, String email, String phone, String address, String gender, String blood_group, String date_of_birth) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
         this.blood_group = blood_group;
         this.date_of_birth = date_of_birth;
     }
 
     public String getFirstname() {
-        return Firstname;
+        return firstname;
     }
 
     public void setFirstname(String firstname) {
-        Firstname = firstname;
+        this.firstname = firstname;
     }
 
     public String getLastname() {
-        return Lastname;
+        return lastname;
     }
 
     public void setLastname(String lastname) {
-        Lastname = lastname;
+        this.lastname = lastname;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
-    public String getPhoneNo() {
-        return PhoneNo;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNo(String phoneNo) {
-        PhoneNo = phoneNo;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     public String getGender() {
-        return Gender;
+        return gender;
     }
 
     public void setGender(String gender) {
-        Gender = gender;
+        this.gender = gender;
     }
 
     public String getBlood_group() {

@@ -9,10 +9,10 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface UserApi {
-    @GET("users")
+    @GET("api/v1/user")
     Call<List<User>> getUsers();
 
-    @POST("items")
+    @POST("api/v1/user")
     Call<Void> addUsers(@Body User user);
 }
 
