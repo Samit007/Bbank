@@ -20,6 +20,7 @@ import java.util.List;
 
 import Api.AdminApi;
 import Model.Admin;
+import Model.LoginResponse;
 import Url.Url;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +30,10 @@ public class AdminPage extends Fragment {
     private EditText etPasswordAdmin, etUsernameAdmin;
     private Button btnLogin;
     private TextView tvIncorrect;
+
+    public AdminPage() {
+        // Required empty public constructor
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,32 +57,29 @@ public class AdminPage extends Fragment {
 
     private void checkUser() {
 
-        final String uname = etUsernameAdmin.getText().toString();
-        final String pass = etPasswordAdmin.getText().toString();
+        final String username = etUsernameAdmin.getText().toString();
+        final String password = etPasswordAdmin.getText().toString();
         AdminApi adminApi = Url.getInstance().create(AdminApi.class);
-        Call<List<Admin>> listCall = adminApi.getAdmin();
 
-        listCall.enqueue(new Callback<List<Admin>>() {
+        Admin admin= new Admin(username,password);
+
+        Call<LoginResponse> call  = adminApi.getAdmin(admin);
+        call.enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(Call<List<Admin>> call, Response<List<Admin>> response) {
-                List<Admin> adminList =response.body();
-                for (Admin admin:adminList){
-                    String Auname = admin.getAdminUsername();
-                    String Apass = admin.getAdminPassword();
-
-                    if (uname.equals(Auname)&& pass.equals(Apass)){
-                        Toast.makeText(getActivity(), "Welcome Admin", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getContext(),AdminDashboard.class);
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+              {
+                    if (response.body().isStatus()) {
+                        Intent intent = new Intent(getActivity(), AdminDashboard.class);
                         startActivity(intent);
-                        getActivity().finish();
+                    } else {
+                        Toast.makeText(getContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Admin>> call, Throwable t) {
-                Toast.makeText(getActivity(), "login Unsuccessfull", Toast.LENGTH_SHORT).show();
-                tvIncorrect.setText("Incorrect Username or password");
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+
             }
         });
     }

@@ -1,26 +1,26 @@
 package Model;
 
 public class Admin {
-    private String AdminUsername,AdminPassword;
+    private String username,password;
 
-    public Admin(String adminUsername, String adminPassword) {
-        AdminUsername = adminUsername;
-        AdminPassword = adminPassword;
+    public Admin(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public String getAdminUsername() {
-        return AdminUsername;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAdminUsername(String adminUsername) {
-        AdminUsername = adminUsername;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getAdminPassword() {
-        return AdminPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAdminPassword(String adminPassword) {
-        AdminPassword = adminPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

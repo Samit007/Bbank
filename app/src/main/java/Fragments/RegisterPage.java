@@ -24,16 +24,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bloodbankmanagementsystem.ImageResponse;
 import com.example.bloodbankmanagementsystem.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Calendar;
 
 import Api.UserApi;
 import Model.User;
 import Url.Url;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,11 +52,6 @@ public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSet
     private Button btnRegister;
     private ImageView btnImage;
     private String imagePath, imageName;
-    Bitmap bitmap;
-    View view;
-    ByteArrayOutputStream byteArrayOutputStream;
-    File file;
-    FileOutputStream fileOutputStream;
 
     public RegisterPage() {
 
@@ -74,7 +74,6 @@ public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSet
         etBloodGroup = view.findViewById(R.id.etBloodgroup);
         btnRegister = view.findViewById(R.id.btnRegister);
         btnImage = view.findViewById(R.id.btnImg);
-        byteArrayOutputStream = new ByteArrayOutputStream();
 
         etDOB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,10 +156,29 @@ public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSet
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
+    private void SaveImageOnly() {
+        File file = new File(imagePath);
 
+        RequestBody requestBody = RequestBody.create
+                (MediaType.parse("multipart/form-data"),file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData
+                ("imageFile", file.getName(), requestBody);
+        UserApi clothesApi = Url.getInstance().create(UserApi.class);
+        Call<ImageResponse> responseCall = clothesApi.uploadImage(body);
+
+        StrictMode();
+        try{
+            Response<ImageResponse> imageResponseResponse = responseCall.execute();
+            imageName = imageResponseResponse.body().getFilename();
+        }catch (IOException e){
+            Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
 
     private void SaveUser(){
 
+        SaveImageOnly();
         UserApi userApi= Url.getInstance().create(UserApi.class);
         String firstname = etFirstname.getText().toString();
         String lastname = etLastname.getText().toString();
@@ -172,8 +190,10 @@ public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSet
         String date_of_birth = etDOB.getText().toString();
         String gender = etGender.getSelectedItem().toString();
         String blood_group = etBloodGroup.getSelectedItem().toString();
+        String userimagename = imageName;
 
-        User user= new User(firstname,lastname,username,password,email,phone,address,gender,blood_group,date_of_birth);
+
+        User user= new User(firstname,lastname,username,password,email,phone,address,gender,blood_group,date_of_birth,userimagename);
         Call<Void> listCall = userApi.addUsers(user);
 
         listCall.enqueue(new Callback<Void>() {

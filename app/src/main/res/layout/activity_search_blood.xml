@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundwhite"
     android:orientation="vertical"
-    tools:context=".Search_blood">
+    tools:context=".Search_blood"
+    tools:showIn="@layout/activity_search"
+    >
 
     <ImageView
         android:layout_width="100dp"
@@ -62,33 +64,7 @@
             android:background="#FF0000" />
 
     </RelativeLayout>
-    <Spinner
-        android:id="@+id/searchbyblood"
-        style="@style/TextAppearance.AppCompat.Body1"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:entries="@array/blood_group"
-        android:spinnerMode="dropdown"
-        android:textAlignment="center"
-        android:textColor="#000"
-        android:textSize="25sp" />
 
-    <Button
-        android:id="@+id/btnsearchbyblood"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/searchbyblood"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/ic_button"
-        android:text="Search by blood"
-        android:textAllCaps="false"
-        android:textSize="20sp" />
 
 
     <android.support.v7.widget.RecyclerView

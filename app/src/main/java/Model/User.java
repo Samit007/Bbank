@@ -1,9 +1,9 @@
 package Model;
 
 public class User {
-    private String firstname,lastname,username,password,email,phone,address,gender,blood_group,date_of_birth;
+    private String firstname,lastname,username,password,email,phone,address,gender,blood_group,date_of_birth,imagename;
 
-    public User(String firstname, String lastname, String username, String password, String email, String phone, String address, String gender, String blood_group, String date_of_birth) {
+    public User(String firstname, String lastname, String username, String password, String email, String phone, String address, String gender, String blood_group, String date_of_birth, String imagename) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
@@ -14,6 +14,12 @@ public class User {
         this.gender = gender;
         this.blood_group = blood_group;
         this.date_of_birth = date_of_birth;
+        this.imagename = imagename;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public String getFirstname() {
@@ -94,5 +100,13 @@ public class User {
 
     public void setDate_of_birth(String date_of_birth) {
         this.date_of_birth = date_of_birth;
+    }
+
+    public String getImagename() {
+        return imagename;
+    }
+
+    public void setImagename(String imagename) {
+        this.imagename = imagename;
     }
 }

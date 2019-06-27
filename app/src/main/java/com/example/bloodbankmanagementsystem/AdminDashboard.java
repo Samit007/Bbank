@@ -4,8 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -41,6 +39,7 @@ public class AdminDashboard extends AppCompatActivity {
         listCall.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+
                 if (response.body() != null) {
                     List<User> users = response.body();
                     DetailsAdapter detailsAdapter = new DetailsAdapter(AdminDashboard.this, users);
@@ -51,7 +50,7 @@ public class AdminDashboard extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                Toast.makeText(AdminDashboard.this, "Can't load Users", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
