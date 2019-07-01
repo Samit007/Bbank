@@ -3,6 +3,19 @@ package Model;
 public class User {
     private String firstname,lastname,username,password,email,phone,address,gender,blood_group,date_of_birth,imagename;
 
+    public User(String firstname, String lastname, String username, String password, String email, String phone, String address, String gender, String blood_group, String date_of_birth) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+        this.blood_group = blood_group;
+        this.date_of_birth = date_of_birth;
+    }
+
     public User(String firstname, String lastname, String username, String password, String email, String phone, String address, String gender, String blood_group, String date_of_birth, String imagename) {
         this.firstname = firstname;
         this.lastname = lastname;
