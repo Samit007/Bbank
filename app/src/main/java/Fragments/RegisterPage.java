@@ -308,4 +308,3 @@ public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSet
         etDOB.setText(date);
     }
 }
-

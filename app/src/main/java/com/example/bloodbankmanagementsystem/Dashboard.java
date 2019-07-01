@@ -181,38 +181,38 @@ public class Dashboard extends Activity implements DatePickerDialog.OnDateSetLis
 
 
 
-            private void update() {
-                SaveImageOnly();
-                UserApi userApi = Url.getInstance().create(UserApi.class);
-                final String firstname = etFirstname.getText().toString();
-                String lastname = etLastname.getText().toString();
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
-                String email = etEmail.getText().toString();
-                String phone = tvphone.getText().toString();
-                String address = etAddres.getText().toString();
-                String date_of_birth = etDOB.getText().toString();
-                String gender = etGender.getSelectedItem().toString();
-                String blood_group = etBloodGroup.getSelectedItem().toString();
-                String userimagename = imageName;
+    private void update() {
+        SaveImageOnly();
+        UserApi userApi = Url.getInstance().create(UserApi.class);
+        final String firstname = etFirstname.getText().toString();
+        String lastname = etLastname.getText().toString();
+        String username = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
+        String email = etEmail.getText().toString();
+        String phone = tvphone.getText().toString();
+        String address = etAddres.getText().toString();
+        String date_of_birth = etDOB.getText().toString();
+        String gender = etGender.getSelectedItem().toString();
+        String blood_group = etBloodGroup.getSelectedItem().toString();
+        String userimagename = imageName;
 
-                User user = new User(firstname, lastname, username, password, email, phone, address, gender, blood_group, date_of_birth, userimagename);
-                Call<UpdateResponse> listCall = userApi.updateUsers(user);
+        User user = new User(firstname, lastname, username, password, email, phone, address, gender, blood_group, date_of_birth, userimagename);
+        Call<UpdateResponse> listCall = userApi.updateUsers(user);
 
-                listCall.enqueue(new Callback<UpdateResponse>() {
-                    @Override
-                    public void onResponse(Call<UpdateResponse> call, Response<UpdateResponse> response) {
-                        UpdateResponse updateResponse = response.body();
-                        if (updateResponse.getMessage().equals("success")) {
-                            Toast.makeText(Dashboard.this, "Updated", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+        listCall.enqueue(new Callback<UpdateResponse>() {
+            @Override
+            public void onResponse(Call<UpdateResponse> call, Response<UpdateResponse> response) {
+                UpdateResponse updateResponse = response.body();
+                if (updateResponse.getMessage().equals("success")) {
+                    Toast.makeText(Dashboard.this, "Updated", Toast.LENGTH_SHORT).show();
+                }
+            }
 
-                    @Override
-                    public void onFailure(Call<UpdateResponse> call, Throwable t) {
+            @Override
+            public void onFailure(Call<UpdateResponse> call, Throwable t) {
 
-                    }
-                });
+            }
+        });
     }
 
     private boolean isEmpty() {
@@ -293,4 +293,3 @@ public class Dashboard extends Activity implements DatePickerDialog.OnDateSetLis
         etDOB.setText(date);
     }
 }
-

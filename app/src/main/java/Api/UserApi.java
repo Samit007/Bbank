@@ -34,5 +34,4 @@ public interface UserApi {
     @PUT("api/v1/user")
     Call<UpdateResponse> updateUsers(@Body User user);
 
-
 }

@@ -46,7 +46,7 @@ public class LoginPage extends Fragment  {
             @Override
             public void onClick(View v) {
                 if (!isEmpty()) {
-                checkUser();
+                    checkUser();
                 }
             }
         });
