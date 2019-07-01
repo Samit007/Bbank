@@ -24,9 +24,16 @@ public interface UserApi {
 
     @POST("api/v1/user")
     Call<RegisterResponse> addUsers(@Body User user);
+<<<<<<< HEAD
 
     @Multipart
     @POST("api/v1/upload")
     Call<ImageResponse> uploadImage(@Part MultipartBody.Part img);
 }
+=======
+>>>>>>> user
 
+    @Multipart
+    @POST("api/v1/upload")
+    Call<ImageResponse> uploadImage(@Part MultipartBody.Part img);
+}

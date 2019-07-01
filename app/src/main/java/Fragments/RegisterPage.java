@@ -105,7 +105,7 @@ public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSet
                 String pass2 = etPassword.getText().toString();
                 if (pass.equals(pass2)) {
                     SaveUser();
-              }
+                }
             }
         });
         btnImage.setOnClickListener(new View.OnClickListener() {
@@ -308,3 +308,4 @@ public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSet
         etDOB.setText(date);
     }
 }
+

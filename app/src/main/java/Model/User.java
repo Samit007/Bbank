@@ -109,4 +109,8 @@ public class User {
     public void setImagename(String imagename) {
         this.imagename = imagename;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> user
