@@ -13,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 
 public interface UserApi {
@@ -28,4 +29,7 @@ public interface UserApi {
     @Multipart
     @POST("api/v1/upload")
     Call<ImageResponse> uploadImage(@Part MultipartBody.Part img);
+
+    @PUT("api/v1/user")
+    Call<List<User>> updateUsers(@Body User user);
 }
