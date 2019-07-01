@@ -2,8 +2,6 @@ package Fragments;
 
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -13,11 +11,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bloodbankmanagementsystem.Dashboard;
 import com.example.bloodbankmanagementsystem.R;
 
-import static android.content.Context.MODE_PRIVATE;
+import Api.UserApi;
+import Model.LoginResponse;
+import Model.User;
+import Url.Url;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginPage extends Fragment  {
     private EditText etUsername, etPassword;
@@ -37,7 +42,7 @@ public class LoginPage extends Fragment  {
             @Override
             public void onClick(View v) {
                 if (!isEmpty()) {
-                checkUser();
+                    checkUser();
                 }
             }
         });
@@ -46,23 +51,30 @@ public class LoginPage extends Fragment  {
 
     private void checkUser() {
 
-//        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("User",MODE_PRIVATE);
-//        String username=sharedPreferences.getString("username","");
-//        String password=sharedPreferences.getString("password","");
-//        if(username.equals(etUsername.getText().toString())||
-//                password.equals(etPassword.getText().toString())){
-        String u=etUsername.getText().toString();
-        String p=etPassword.getText().toString();
-        if (u.equals("admin")&& p.equals("admin"))
-        {
-            Intent intent = new Intent(getActivity(),Dashboard.class);
-            startActivity(intent);
-        }else{
-            tvIncorrect.setText("incorrect username or password");
-            tvIncorrect.setError("");
-            tvIncorrect.requestFocus();
-            return;
-        }
+        String username=etUsername.getText().toString();
+        String password=etPassword.getText().toString();
+        UserApi userApi = Url.getInstance().create(UserApi.class);
+
+        User user = new User(username,password);
+
+        Call<LoginResponse> call  = userApi.getResponse(user);
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if (response.body().isStatus()) {
+                    Toast.makeText(getContext(), "Welcome", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), Dashboard.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     private boolean isEmpty() {

@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvusernameinlogin"
+            android:id="@+id/tvphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Welcome"

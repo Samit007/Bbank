@@ -27,14 +27,11 @@ import android.widget.Toast;
 import com.example.bloodbankmanagementsystem.ImageResponse;
 import com.example.bloodbankmanagementsystem.R;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
 import Api.UserApi;
-import Model.LoginResponse;
 import Model.RegisterResponse;
 import Model.User;
 import Url.Url;
@@ -308,4 +305,3 @@ public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSet
         etDOB.setText(date);
     }
 }
-

@@ -6,6 +6,7 @@ import java.util.List;
 
 import Model.LoginResponse;
 import Model.RegisterResponse;
+import Model.UpdateResponse;
 import Model.User;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -31,5 +32,5 @@ public interface UserApi {
     Call<ImageResponse> uploadImage(@Part MultipartBody.Part img);
 
     @PUT("api/v1/user")
-    Call<List<User>> updateUsers(@Body User user);
+    Call<UpdateResponse> updateUsers(@Body User user);
 }
