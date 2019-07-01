@@ -2,6 +2,7 @@ package Fragments;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -24,17 +25,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class LoginPage extends Fragment  {
-    private EditText etUsername, etPassword;
+    private EditText etPhone, etPassword;
     private Button btnLogin;
     private TextView tvIncorrect;
+    private  String a;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.activity_login_page, container, false);
-        etUsername = view.findViewById(R.id.etUsernamelogin);
+        etPhone = view.findViewById(R.id.etPhonelogin);
         etPassword = view.findViewById(R.id.etPasswordlogin);
         tvIncorrect = view.findViewById(R.id.tvIncorrect);
         btnLogin = view.findViewById(R.id.btnlogin);
@@ -51,17 +55,22 @@ public class LoginPage extends Fragment  {
 
     private void checkUser() {
 
-        String username=etUsername.getText().toString();
+        final String phone=etPhone.getText().toString();
         String password=etPassword.getText().toString();
         UserApi userApi = Url.getInstance().create(UserApi.class);
 
-        User user = new User(username,password);
+        final User user = new User(phone,password);
 
         Call<LoginResponse> call  = userApi.getResponse(user);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.body().isStatus()) {
+                    SharedPreferences sharedPreferences=getActivity().getSharedPreferences("User",MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString("phone",etPhone.getText().toString());
+                    editor.commit();
+
                     Toast.makeText(getContext(), "Welcome", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), Dashboard.class);
                     startActivity(intent);
@@ -78,9 +87,9 @@ public class LoginPage extends Fragment  {
     }
 
     private boolean isEmpty() {
-        if (TextUtils.isEmpty((etUsername.getText().toString()))) {
-            etUsername.setError("Please enter Username");
-            etUsername.requestFocus();
+        if (TextUtils.isEmpty((etPhone.getText().toString()))) {
+            etPhone.setError("Please enter Phone number");
+            etPhone.requestFocus();
             return true;
         } else if (TextUtils.isEmpty((etPassword.getText().toString()))) {
             etPassword.setError("Please enter Password");

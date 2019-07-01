@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvphone"
+            android:id="@+id/tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Welcome"
@@ -24,7 +24,7 @@
 
         <TextView
 
-            android:id="@+id/tvuserdetail"
+            android:id="@+id/tvphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="User Id"
@@ -134,19 +134,7 @@
             android:layout_marginLeft="35dp"
             android:background="#CF8086" />
 
-        <EditText
-            android:id="@+id/upPhoneNo"
-            style="@style/textStyle1"
-            android:drawableLeft="@drawable/ic_contacts_black_24dp"
-            android:hint="Enter Phone Number"
-            android:inputType="number"
-            android:maxLines="1" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="35dp"
-            android:background="#CF8086" />
 
         <EditText
             android:id="@+id/upAddress"

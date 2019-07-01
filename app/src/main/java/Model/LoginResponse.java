@@ -4,6 +4,7 @@ public class LoginResponse {
         boolean status;
         String accessToken;
 
+
         public LoginResponse(boolean status, String accessToken) {
                 this.status = status;
                 this.accessToken = accessToken;
