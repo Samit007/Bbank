@@ -5,6 +5,7 @@ import com.example.bloodbankmanagementsystem.ImageResponse;
 import java.util.List;
 
 import Model.LoginResponse;
+import Model.RegisterResponse;
 import Model.User;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -22,7 +23,7 @@ public interface UserApi {
     Call<LoginResponse> getResponse(@Body User user);
 
     @POST("api/v1/user")
-    Call<Void> addUsers(@Body User user);
+    Call<RegisterResponse> addUsers(@Body User user);
 
     @Multipart
     @POST("api/v1/upload")

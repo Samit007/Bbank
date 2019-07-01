@@ -10,6 +10,7 @@ public class LoginResponse {
         this.accessToken = accessToken;
     }
 
+
     public boolean isStatus() {
         return status;
     }
@@ -25,4 +26,5 @@ public class LoginResponse {
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
+
 }

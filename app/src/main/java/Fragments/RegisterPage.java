@@ -34,6 +34,8 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import Api.UserApi;
+import Model.LoginResponse;
+import Model.RegisterResponse;
 import Model.User;
 import Url.Url;
 import okhttp3.MediaType;
@@ -180,7 +182,7 @@ public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSet
 
         SaveImageOnly();
         UserApi userApi= Url.getInstance().create(UserApi.class);
-        String firstname = etFirstname.getText().toString();
+        final String firstname = etFirstname.getText().toString();
         String lastname = etLastname.getText().toString();
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
@@ -194,17 +196,32 @@ public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSet
 
 
         User user= new User(firstname,lastname,username,password,email,phone,address,gender,blood_group,date_of_birth,userimagename);
-        Call<Void> listCall = userApi.addUsers(user);
+        Call<RegisterResponse> listCall = userApi.addUsers(user);
 
-        listCall.enqueue(new Callback<Void>() {
+        listCall.enqueue(new Callback<RegisterResponse>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                RegisterResponse registerResponse = response.body();
+                if (registerResponse.getMessage().equals("phone number already registered")){
+                    Toast.makeText(getActivity(), "Phone number already registered", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getActivity(), "Registered successfully", Toast.LENGTH_SHORT).show();
+                }
+                etFirstname.setText("");
+                etLastname.setText("");
+                etAddres.setText("");
+                etDOB.setText("");
+                etEmail.setText("");
+                etPassword.setText("");
+                etPassword2.setText("");
+                etUsername.setText("");
+                etPhoneNo.setText("");
+
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(getActivity(), "User Not Registered"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+
             }
         });
     }

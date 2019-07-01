@@ -50,6 +50,7 @@
             android:textStyle="bold"
             android:layout_marginBottom="5dp"/>
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,7 +83,8 @@
                 style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_person_black_24dp"
                 android:hint="Enter Firstname"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="a" />
 
             <View
                 android:layout_width="match_parent"
@@ -95,7 +97,8 @@
                 style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_person_black_24dp"
                 android:hint="Enter Lastname"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="a" />
 
             <View
                 android:layout_width="match_parent"
@@ -108,7 +111,8 @@
                 style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_person_black_24dp"
                 android:hint="Enter Username"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="a" />
 
             <View
                 android:layout_width="match_parent"
@@ -122,7 +126,8 @@
                 android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
                 android:hint="Enter Password"
                 android:inputType="textPassword"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="a" />
 
             <View
                 android:layout_width="match_parent"
@@ -137,7 +142,8 @@
                 android:drawablePadding="8dp"
                 android:hint="Re-Enter Password"
                 android:inputType="textPassword"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="a" />
 
             <View
                 android:layout_width="match_parent"
@@ -150,7 +156,8 @@
                 style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_email_black_24dp"
                 android:hint="Enter Email"
-                android:maxLines="2" />
+                android:maxLines="2"
+                android:text="a" />
 
             <View
                 android:layout_width="match_parent"
@@ -164,6 +171,7 @@
                 android:drawableLeft="@drawable/ic_contacts_black_24dp"
                 android:hint="Enter Phone Number"
                 android:inputType="number"
+                android:maxLength="10"
                 android:maxLines="1" />
 
             <View
@@ -177,7 +185,8 @@
                 style="@style/textStyle1"
                 android:drawableLeft="@drawable/ic_home_black_24dp"
                 android:hint="Enter Address"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="a" />
 
             <View
                 android:layout_width="match_parent"
@@ -266,7 +275,7 @@
                 android:text="Register"
                 android:textAllCaps="false"
                 android:textColor="#FFF"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
