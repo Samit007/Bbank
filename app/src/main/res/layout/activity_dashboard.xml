@@ -24,7 +24,7 @@
 
         <TextView
 
-            android:id="@+id/tvuserdetail"
+            android:id="@+id/tvphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="User Id"
@@ -127,20 +127,6 @@
             android:drawableLeft="@drawable/ic_email_black_24dp"
             android:hint="Enter Email"
             android:maxLines="2" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="35dp"
-            android:background="#CF8086" />
-
-        <EditText
-            android:id="@+id/upPhoneNo"
-            style="@style/textStyle1"
-            android:drawableLeft="@drawable/ic_contacts_black_24dp"
-            android:hint="Enter Phone Number"
-            android:inputType="number"
-            android:maxLines="1" />
 
         <View
             android:layout_width="match_parent"

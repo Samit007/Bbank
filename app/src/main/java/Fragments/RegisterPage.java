@@ -165,8 +165,8 @@ public class RegisterPage extends Fragment implements DatePickerDialog.OnDateSet
                 (MediaType.parse("multipart/form-data"),file);
         MultipartBody.Part body = MultipartBody.Part.createFormData
                 ("imageFile", file.getName(), requestBody);
-        UserApi clothesApi = Url.getInstance().create(UserApi.class);
-        Call<ImageResponse> responseCall = clothesApi.uploadImage(body);
+        UserApi userApi = Url.getInstance().create(UserApi.class);
+        Call<ImageResponse> responseCall = userApi.uploadImage(body);
 
         StrictMode();
         try{

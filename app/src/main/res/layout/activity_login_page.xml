@@ -64,10 +64,10 @@
 
 
             <EditText
-                android:id="@+id/etUsernamelogin"
+                android:id="@+id/etPhonelogin"
                 style="@style/textStyle"
                 android:drawableLeft="@drawable/ic_person_black_24dp"
-                android:hint="Username"
+                android:hint="Phone Number"
                 android:maxLines="1" />
 
             <View
