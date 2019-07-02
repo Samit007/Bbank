@@ -74,6 +74,7 @@ public class LoginPage extends Fragment  {
                     Toast.makeText(getContext(), "Welcome", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), Dashboard.class);
                     startActivity(intent);
+
                 } else {
                     Toast.makeText(getContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
                 }
@@ -81,7 +82,7 @@ public class LoginPage extends Fragment  {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-
+                Toast.makeText(getContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
             }
         });
     }

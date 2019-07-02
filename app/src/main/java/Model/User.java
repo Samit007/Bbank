@@ -1,7 +1,7 @@
 package Model;
 
 public class User {
-    private String firstname,lastname,username,password,email,phone,address,gender,blood_group,date_of_birth,imagename,id;
+    private String firstname, lastname, username, password, email, phone, address, gender, blood_group, date_of_birth, imagename, id;
 
     public User(String firstname, String lastname, String username, String password, String email, String phone, String address, String gender, String blood_group, String date_of_birth) {
         this.firstname = firstname;
@@ -16,7 +16,8 @@ public class User {
         this.date_of_birth = date_of_birth;
     }
 
-    public User(String firstname, String lastname, String username, String password, String email, String phone, String address, String gender, String blood_group, String date_of_birth,String id) {
+
+    public User(String firstname, String lastname, String username, String password, String email, String phone, String address, String gender, String blood_group, String date_of_birth, String imagename) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
@@ -27,6 +28,8 @@ public class User {
         this.gender = gender;
         this.blood_group = blood_group;
         this.date_of_birth = date_of_birth;
+        this.imagename = imagename;
+
     }
 
     public User(String phone, String password) {
