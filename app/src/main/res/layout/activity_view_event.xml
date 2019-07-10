@@ -4,44 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
+    tools:context=".ViewEvent"
     android:orientation="vertical"
-    tools:context=".Dashboard"
-    tools:showIn="@layout/activity_event">
+    android:layout_marginTop="20dp"
+    android:layout_gravity="center"
+    tools:showIn="@layout/activity_viewev">
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="0dp"
         android:src="@drawable/blood_logo" />
-
     <Button
+        android:id="@+id/btnview"
         style="@style/Base.TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50px"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:background="@drawable/ic_button"
-        android:padding="40px"
-        android:text="Update Profile"
+        android:drawableLeft="@drawable/ic_touch_app_black_24dp"
+        android:paddingRight="20dp"
+        android:text="Add Event"
         android:textAllCaps="false"
-        android:id="@+id/btnupt"/>
-
-    <TextView
-        style="@style/textStyle"
-        android:layout_marginBottom="20dp"
-        android:hint="Events List:"
-        android:textSize="30dp"
-        android:layout_gravity="center"/>
-
+        android:textColor="#FFF"
+        android:textSize="20sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
 
 
 </LinearLayout>

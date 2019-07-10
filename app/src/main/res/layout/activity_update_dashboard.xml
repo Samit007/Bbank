@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UpdateDashboard">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome"
+            android:textAlignment="center"
+            android:textColor="#FF0000"
+            android:textSize="50dp"
+            android:textStyle="bold" />
+
+        <TextView
+
+            android:id="@+id/tvphone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User Id"
+            android:textAlignment="center"
+            android:textSize="40dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/upImg"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/ic_image_black_24dp"
+                android:backgroundTint="@color/cardview_shadow_start_color" />
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/upFirstname"
+            style="@style/textStyle1"
+            android:drawableLeft="@drawable/ic_person_black_24dp"
+            android:hint="Enter Firstname"
+            android:maxLines="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="35dp"
+            android:background="#CF8086" />
+
+        <EditText
+            android:id="@+id/upLastname"
+            style="@style/textStyle1"
+            android:drawableLeft="@drawable/ic_person_black_24dp"
+            android:hint="Enter Lastname"
+            android:maxLines="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="35dp"
+            android:background="#CF8086" />
+
+        <EditText
+            android:id="@+id/upphone"
+            style="@style/textStyle1"
+            android:drawableLeft="@drawable/ic_person_black_24dp"
+            android:hint="Enter phone no"
+            android:maxLines="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="35dp"
+            android:background="#CF8086" />
+
+        <EditText
+            android:id="@+id/upPassword"
+            style="@style/textStyle1"
+            android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="35dp"
+            android:background="#CF8086" />
+
+        <EditText
+            android:id="@+id/upPassword2"
+            style="@style/textStyle1"
+            android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+            android:drawablePadding="8dp"
+            android:hint="Re-Enter Password"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="35dp"
+            android:background="#CF8086" />
+
+        <EditText
+            android:id="@+id/upEmail"
+            style="@style/textStyle1"
+            android:drawableLeft="@drawable/ic_email_black_24dp"
+            android:hint="Enter Email"
+            android:maxLines="2" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="35dp"
+            android:background="#CF8086" />
+
+        <EditText
+            android:id="@+id/upAddress"
+            style="@style/textStyle1"
+            android:drawableLeft="@drawable/ic_home_black_24dp"
+            android:hint="Enter Address"
+            android:maxLines="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="35dp"
+            android:background="#CF8086" />
+
+        <TextView
+            android:id="@+id/upDOB"
+            style="@style/textStyle1"
+            android:drawableLeft="@drawable/ic_home_black_24dp"
+            android:hint="Enter Date of birth"
+            android:maxLines="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="35dp"
+            android:background="#CF8086" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_list_black_24dp"
+                android:text="Select Gender:"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/upGender"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="180dp"
+                android:layout_marginTop="20dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:entries="@array/gender"
+                android:spinnerMode="dropdown"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv1"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_list_black_24dp"
+                android:text="Select Blood:"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/upBloodgroup"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@+id/upGender"
+                android:layout_marginLeft="180dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:entries="@array/blood_group"
+                android:spinnerMode="dropdown"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/btnUp"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/ic_button"
+                android:drawableLeft="@drawable/ic_touch_app_black_24dp"
+                android:paddingRight="20dp"
+                android:text="Update"
+                android:textAllCaps="false"
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                android:layout_margin="30dp"/>
+            <Button
+                android:id="@+id/btnDel"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/ic_button"
+                android:drawableLeft="@drawable/ic_touch_app_black_24dp"
+                android:paddingRight="20dp"
+                android:text="Delete"
+                android:layout_margin="30dp"
+                android:textAllCaps="false"
+                android:textColor="#FFF"
+                android:textSize="20sp"/>
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

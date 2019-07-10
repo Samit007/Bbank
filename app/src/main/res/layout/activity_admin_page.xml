@@ -67,8 +67,9 @@
                 android:id="@+id/etUsernameloginAdmin"
                 style="@style/textStyle"
                 android:drawableLeft="@drawable/ic_person_black_24dp"
-                android:hint="Username"
-                android:maxLines="1" />
+                android:hint="Phone"
+                android:maxLines="1"
+                android:inputType="number"/>
 
             <View
                 android:layout_width="match_parent"

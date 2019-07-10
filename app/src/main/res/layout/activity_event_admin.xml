@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:orientation="vertical"
+    tools:context=".EventAdminActivity">
+
+
+    <EditText
+        android:id="@+id/tvevname"
+        style="@style/textStyle"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="150dp"
+        android:hint="Event name" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginLeft="15dp"
+        android:background="#CF8086" />
+
+    <EditText
+        android:id="@+id/tvevadd"
+        style="@style/textStyle"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="Event Address" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginLeft="15dp"
+        android:background="#CF8086" />
+
+    <EditText
+        android:id="@+id/tvest"
+        style="@style/textStyle"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="Event Start time" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginLeft="15dp"
+        android:background="#CF8086" />
+
+    <EditText
+        android:id="@+id/tveet"
+        style="@style/textStyle"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="Event End Time" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginLeft="15dp"
+        android:background="#CF8086" />
+
+    <EditText
+        android:id="@+id/tvdat"
+        style="@style/textStyle"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="Event Date" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginLeft="15dp"
+        android:background="#CF8086" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="110dp"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/btnupte"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="11dp"
+            android:background="@drawable/ic_button"
+            android:drawableLeft="@drawable/ic_touch_app_black_24dp"
+            android:text="Update"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btndele"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="11dp"
+            android:background="@drawable/ic_button"
+            android:drawableLeft="@drawable/ic_touch_app_black_24dp"
+            android:text="Delete"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btncncl"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="11dp"
+            android:background="@drawable/ic_button"
+            android:drawableLeft="@drawable/ic_touch_app_black_24dp"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

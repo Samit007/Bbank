@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_marginTop="40dp"
+    android:background="@drawable/backgroundwhite"
+    android:orientation="vertical"
+    tools:context=".DetailsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgProfile2"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:src="@drawable/noavatar" />
+
+            <TextView
+                android:id="@+id/tvNameadmin"
+                style="@style/textStyle"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:hint="First name" />
+
+            <TextView
+                android:id="@+id/tvlastnameadmin"
+                style="@style/textStyle"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:hint="Last name" />`
+
+            <TextView
+                android:id="@+id/tvPhoneNoadmin"
+                style="@style/textStyle"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_contacts_black_24dp"
+                android:hint="Phone no" />
+
+            <TextView
+                android:id="@+id/tvEmailadmin"
+                style="@style/textStyle"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_email_black_24dp"
+                android:hint="Email Id" />
+
+            <TextView
+                android:id="@+id/tvAddressadmin"
+                style="@style/textStyle"
+                android:layout_below="@+id/tvEmailadmin"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_home_black_24dp"
+                android:hint="Address" />
+
+            <TextView
+                android:id="@+id/tvGenderadmin"
+                style="@style/textStyle"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_list_black_24dp"
+                android:hint="Gender" />
+
+            <TextView
+                android:id="@+id/tvBloodadmin"
+                style="@style/textStyle"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_blood"
+                android:hint="Blood Group" />
+
+            <TextView
+                android:id="@+id/tvDobadmin"
+                style="@style/textStyle"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_list_black_24dp"
+                android:hint="Date of Birth" />
+
+            <Button
+                android:id="@+id/btndeladmin"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/ic_button"
+                android:drawableLeft="@drawable/ic_touch_app_black_24dp"
+                android:paddingRight="20dp"
+                android:text="Delete"
+                android:textAllCaps="false"
+                android:textColor="#FFF"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50px"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

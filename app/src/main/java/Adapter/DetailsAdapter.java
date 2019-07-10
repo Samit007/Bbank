@@ -62,7 +62,6 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailsV
                 intent.putExtra("imagename",imgPath);
                 intent.putExtra("firstname", user.getFirstname());
                 intent.putExtra("lasttname", user.getLastname());
-                intent.putExtra("username", user.getUsername());
                 intent.putExtra("phone", user.getPhone());
                 intent.putExtra("email", user.getEmail());
                 intent.putExtra("address", user.getAddress());

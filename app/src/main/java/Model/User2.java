@@ -1,17 +1,17 @@
 package Model;
 
 public class User2 {
-    private String phone;
+    private String userid;
 
-    public String getPhone() {
-        return phone;
+    public User2(String userid) {
+        this.userid = userid;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public String getUserid() {
+        return userid;
     }
 
-    public User2(String phone) {
-        this.phone = phone;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 }

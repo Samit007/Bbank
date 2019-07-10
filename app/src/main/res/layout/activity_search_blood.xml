@@ -7,8 +7,7 @@
     android:background="@drawable/backgroundwhite"
     android:orientation="vertical"
     tools:context=".Search_blood"
-    tools:showIn="@layout/activity_search"
-    >
+    tools:showIn="@layout/activity_search">
 
     <ImageView
         android:layout_width="100dp"

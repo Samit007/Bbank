@@ -1,12 +1,12 @@
 package Model;
 
 public class User {
-    private String firstname, lastname, username, password, email, phone, address, gender, blood_group, date_of_birth, imagename, id;
+    private String userid, firstname, lastname, password, email, phone, address, gender, blood_group, date_of_birth, imagename;
 
-    public User(String firstname, String lastname, String username, String password, String email, String phone, String address, String gender, String blood_group, String date_of_birth) {
+    public User(String userid, String firstname, String lastname, String password, String email, String phone, String address, String gender, String blood_group, String date_of_birth, String imagename) {
+        this.userid=userid;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
@@ -14,39 +14,20 @@ public class User {
         this.gender = gender;
         this.blood_group = blood_group;
         this.date_of_birth = date_of_birth;
+        this.imagename=imagename;
     }
 
-
-    public User(String firstname, String lastname, String username, String password, String email, String phone, String address, String gender, String blood_group, String date_of_birth, String imagename) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.gender = gender;
-        this.blood_group = blood_group;
-        this.date_of_birth = date_of_birth;
-        this.imagename = imagename;
-
-    }
-
-    public User(String phone, String password) {
+    public User(String phone, String password){
         this.phone = phone;
         this.password = password;
     }
 
-    public String getId() {
-        return id;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public User(String id) {
-        this.id = id;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public String getFirstname() {
@@ -63,14 +44,6 @@ public class User {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {

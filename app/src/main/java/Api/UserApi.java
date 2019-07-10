@@ -1,7 +1,5 @@
 package Api;
 
-import android.database.Observable;
-
 import com.example.bloodbankmanagementsystem.ImageResponse;
 
 import java.util.List;
@@ -15,7 +13,6 @@ import Model.User2;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.Multipart;
@@ -24,6 +21,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Part;
 
 public interface UserApi {
+
     @GET("api/v1/user")
     Call<List<User>> getUsers();
 
@@ -39,10 +37,10 @@ public interface UserApi {
 
     @PUT("api/v1/user")
     Call<UpdateResponse> updateUsers(@Body User user);
-    //    @DELETE("api/v1/user")
-//    Call<DeleteResponse> deleteUsers(@Body User2 user2);
-//
+
     @HTTP(method = "DELETE", path = "api/v1/user", hasBody = true)
     Call<DeleteResponse> deleteUsers(@Body User2 user2);
 
+//    @HTTP(method = "DELETE", path = "api/v1/user/:userid", hasBody = true)
+//    Call<DeleteResponse> delUsers(@Body User2 user2);
 }

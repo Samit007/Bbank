@@ -67,12 +67,8 @@
                 android:id="@+id/etPhonelogin"
                 style="@style/textStyle"
                 android:drawableLeft="@drawable/ic_person_black_24dp"
-<<<<<<< HEAD
                 android:hint="Phone Number"
-=======
-                android:hint="Username"
                 android:text="9844687013"
->>>>>>> user
                 android:maxLines="1" />
 
             <View

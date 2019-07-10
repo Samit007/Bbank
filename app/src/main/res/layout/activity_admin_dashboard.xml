@@ -20,12 +20,28 @@
         android:id="@+id/textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome in admin panel"
+        android:text="Welcome Admin "
         android:textColor="#04B409"
         android:textSize="40sp"
         android:textAlignment="center"
         android:gravity="center"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btnViewevent"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/ic_button"
+        android:drawableLeft="@drawable/ic_touch_app_black_24dp"
+        android:paddingRight="20dp"
+        android:text="View Events"
+        android:textAllCaps="false"
+        android:textColor="#FFF"
+        android:textSize="20sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"

@@ -13,10 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bloodbankmanagementsystem.AdminDashboard;
-import com.example.bloodbankmanagementsystem.Dashboard;
 import com.example.bloodbankmanagementsystem.R;
-
-import java.util.List;
 
 import Api.AdminApi;
 import Model.Admin;
@@ -57,11 +54,11 @@ public class AdminPage extends Fragment {
 
     private void checkUser() {
 
-        final String username = etUsernameAdmin.getText().toString();
+        final String phone = etUsernameAdmin.getText().toString();
         final String password = etPasswordAdmin.getText().toString();
         AdminApi adminApi = Url.getInstance().create(AdminApi.class);
 
-        Admin admin= new Admin(username,password);
+        Admin admin= new Admin(phone,password);
 
         Call<LoginResponse> call  = adminApi.getAdmin(admin);
         call.enqueue(new Callback<LoginResponse>() {

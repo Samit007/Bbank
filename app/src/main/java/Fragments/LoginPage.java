@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bloodbankmanagementsystem.Dashboard;
+import com.example.bloodbankmanagementsystem.UpdateDashboard;
 import com.example.bloodbankmanagementsystem.R;
 
 import Api.UserApi;
@@ -27,11 +28,11 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class LoginPage extends Fragment  {
+public class LoginPage extends Fragment {
     private EditText etPhone, etPassword;
     private Button btnLogin;
     private TextView tvIncorrect;
-    private  String a;
+    private String a;
 
 
     @Override
@@ -55,26 +56,25 @@ public class LoginPage extends Fragment  {
 
     private void checkUser() {
 
-        final String phone=etPhone.getText().toString();
-        String password=etPassword.getText().toString();
+        final String phone = etPhone.getText().toString();
+        String password = etPassword.getText().toString();
         UserApi userApi = Url.getInstance().create(UserApi.class);
 
-        final User user = new User(phone,password);
+        final User user = new User(phone, password);
 
-        Call<LoginResponse> call  = userApi.getResponse(user);
+        Call<LoginResponse> call = userApi.getResponse(user);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.body().isStatus()) {
-                    SharedPreferences sharedPreferences=getActivity().getSharedPreferences("User",MODE_PRIVATE);
-                    SharedPreferences.Editor editor=sharedPreferences.edit();
-                    editor.putString("phone",etPhone.getText().toString());
+                    String id = (response.body().getUserid());
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("User", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("userid", id);
                     editor.commit();
-
                     Toast.makeText(getContext(), "Welcome", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), Dashboard.class);
                     startActivity(intent);
-
                 } else {
                     Toast.makeText(getContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
                 }

@@ -33,7 +33,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            tvName.setText(bundle.getString("username"));
+            tvName.setText(bundle.getString("firstname"));
             tvPhoneNo.setText(bundle.getString("phone"));
             tvEmail.setText(bundle.getString("email"));
             tvAddress.setText(bundle.getString("address"));

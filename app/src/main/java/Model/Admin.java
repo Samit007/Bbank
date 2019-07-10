@@ -1,19 +1,19 @@
 package Model;
 
 public class Admin {
-    private String username,password;
+    private String phone,password;
 
-    public Admin(String username, String password) {
-        this.username = username;
+    public Admin(String phone, String password) {
+        this.phone = phone;
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPassword() {
