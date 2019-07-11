@@ -3,6 +3,10 @@ package com.example.bloodbankmanagementsystem;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +29,7 @@ import retrofit2.Retrofit;
 public class Dashboard extends AppCompatActivity {
     private Button btnupt;
     private RecyclerView recyclerView;
+    private SensorManager sensorManager;
 
     @Override
     public void onBackPressed() {
@@ -55,6 +60,7 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         btnupt=findViewById(R.id.btnupt);
         recyclerView = findViewById(R.id.recyclerview);
+        proximity();
 
         showEvents();
         btnupt.setOnClickListener(new View.OnClickListener() {
@@ -87,4 +93,27 @@ public class Dashboard extends AppCompatActivity {
         });
 
     }
+    private void proximity() {
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        SensorEventListener proxilistener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                if (event.values[0] <= 2) {
+                    Intent intent=new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        };
+        sensorManager.registerListener(proxilistener,sensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+    }
+
 }

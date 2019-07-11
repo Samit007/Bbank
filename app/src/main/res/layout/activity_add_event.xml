@@ -38,7 +38,7 @@
             android:id="@+id/eteventaddress"
             style="@style/textStyle1"
             android:layout_below="@+id/eteventname"
-            android:drawableLeft="@drawable/ic_person_black_24dp"
+            android:drawableLeft="@drawable/ic_home_black_24dp"
             android:hint="Enter Address"
             android:maxLines="1"
             android:text="" />
@@ -54,7 +54,7 @@
             android:id="@+id/eteventstarttime"
             style="@style/textStyle1"
             android:layout_below="@+id/eteventaddress"
-            android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+            android:drawableLeft="@drawable/ic_access_time_black_24dp"
             android:hint="Enter Start time"
             android:maxLines="1"
             android:text="" />
@@ -70,7 +70,7 @@
             android:id="@+id/eteventendtime"
             style="@style/textStyle1"
             android:layout_below="@+id/eteventstarttime"
-            android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+            android:drawableLeft="@drawable/ic_access_time_black_24dp"
             android:hint="Enter End time"
             android:maxLines="1"
             android:text="" />
@@ -86,7 +86,7 @@
             android:id="@+id/eteventdate"
             style="@style/textStyle1"
             android:layout_below="@+id/eteventendtime"
-            android:drawableLeft="@drawable/ic_email_black_24dp"
+            android:drawableLeft="@drawable/ic_date_range_black_24dp"
             android:hint="Enter Date"
             android:maxLines="2"
             android:text="" />

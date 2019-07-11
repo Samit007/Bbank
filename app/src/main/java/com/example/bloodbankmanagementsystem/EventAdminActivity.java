@@ -38,7 +38,7 @@ public class EventAdminActivity extends AppCompatActivity {
         tvest = findViewById(R.id.tvest);
         tveet = findViewById(R.id.tveet);
         tved = findViewById(R.id.tvdat);
-        btnupte = findViewById(R.id.btnupte);
+//        btnupte = findViewById(R.id.btnupte);
         btndele = findViewById(R.id.btndele);
         btncncl = findViewById(R.id.btncncl);
 
@@ -61,36 +61,38 @@ public class EventAdminActivity extends AppCompatActivity {
             }
         });
 
-        btnupte.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EventApi eventApi = Url.getInstance().create(EventApi.class);
-                String eventname = bundle.getString("eventname");
-                String eventaddress = bundle.getString("eventaddress");
-                String eventstarttime = bundle.getString("eventstarttime");
-                String eventendtime = bundle.getString("eventendtime");
-                String eventdate = bundle.getString("eventdate");
-                String eventid = bundle.getString("eventid");
-                Event event = new Event(eventname, eventaddress, eventstarttime, eventendtime, eventdate, eventid);
-                Call<UpdateEResponse> call = eventApi.updateEvent(event);
-
-                call.enqueue(new Callback<UpdateEResponse>() {
-                    @Override
-                    public void onResponse(Call<UpdateEResponse> call, Response<UpdateEResponse> response) {
-                        UpdateEResponse updateEResponse = response.body();
-                        if (updateEResponse.getMessage().equals("success")) {
-                            Toast.makeText(EventAdminActivity.this, "Updated", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(EventAdminActivity.this, "err", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<UpdateEResponse> call, Throwable t) {
-                        Toast.makeText(EventAdminActivity.this, "Error"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
+//        btnupte.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                EventApi eventApi = Url.getInstance().create(EventApi.class);
+//                String eventname = tven.getText().toString();
+//                String eventaddress = tvea.getText().toString();
+//                String eventstarttime = tvest.getText().toString();
+//                String eventendtime = tved.getText().toString();
+//                String eventdate = tved.getText().toString();
+//                String eventid = bundle.getString("eventid");
+//
+//                Event event = new Event(eventid, eventname, eventaddress, eventstarttime, eventendtime, eventdate);
+//
+//                Call<UpdateEResponse> call = eventApi.updateevent(event);
+//
+//                call.enqueue(new Callback<UpdateEResponse>() {
+//                    @Override
+//                    public void onResponse(Call<UpdateEResponse> call, Response<UpdateEResponse> response) {
+//                        UpdateEResponse updateEResponse = response.body();
+//                        if (updateEResponse.isStatus()) {
+//                            Toast.makeText(EventAdminActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+//                        }else{
+//                            Toast.makeText(EventAdminActivity.this, "err", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                    @Override
+//                    public void onFailure(Call<UpdateEResponse> call, Throwable t) {
+//                        Toast.makeText(EventAdminActivity.this, "Error"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//        });
 
         btndele.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +117,7 @@ public class EventAdminActivity extends AppCompatActivity {
 
                                     Toast.makeText(EventAdminActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(EventAdminActivity.this, AdminDashboard.class);
+                                    Intent intent = new Intent(EventAdminActivity.this, ViewEvent.class);
                                     startActivity(intent);
                                     finish();
                                 } else {

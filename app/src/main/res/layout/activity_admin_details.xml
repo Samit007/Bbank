@@ -5,10 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:layout_marginTop="40dp"
     android:background="@drawable/backgroundwhite"
     android:orientation="vertical"
     tools:context=".DetailsActivity">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/blood_logo"/>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -88,7 +96,7 @@
                 style="@style/textStyle"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:drawableLeft="@drawable/ic_list_black_24dp"
+                android:drawableLeft="@drawable/ic_date_range_black_24dp"
                 android:hint="Date of Birth" />
 
             <Button

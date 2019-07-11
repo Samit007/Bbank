@@ -1,6 +1,10 @@
 package com.example.bloodbankmanagementsystem;
 
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -17,11 +21,14 @@ public class ViewPagerActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private TextView btnSearch;
+    private SensorManager sensorManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager);
             btnSearch = findViewById(R.id.btnSearch);
+            proximity();
 
             btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +48,28 @@ public class ViewPagerActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void proximity() {
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        SensorEventListener proxilistener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) { if (event.values[0] <= 1) {
+                    Intent intent=new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        };
+        sensorManager.registerListener(proxilistener,sensor, SensorManager.SENSOR_DELAY_NORMAL);
+
     }
 
 }

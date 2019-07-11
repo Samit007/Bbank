@@ -2,9 +2,12 @@ package com.example.bloodbankmanagementsystem;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Notification;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -20,6 +23,7 @@ import java.util.Calendar;
 
 import Api.EventApi;
 import Api.UserApi;
+import CreateChannel.CreateChannel;
 import Fragments.RegisterPage;
 import Model.Event;
 import Model.EventResponse;
@@ -33,6 +37,8 @@ public class AddEvent extends AppCompatActivity implements DatePickerDialog.OnDa
     private EditText etname, etaddress;
     private TextView etstime, etetime, etdate;
     private Button btnaddev, btnbck;
+
+    NotificationManagerCompat notificationManagerCompat;
 
     @Override
     public void onBackPressed() {
@@ -53,6 +59,9 @@ public class AddEvent extends AppCompatActivity implements DatePickerDialog.OnDa
         etdate = findViewById(R.id.eteventdate);
         btnaddev = findViewById(R.id.btnAddev);
         btnbck=findViewById(R.id.btnbck);
+
+        notificationManagerCompat = NotificationManagerCompat.from(this);
+        CreateChannel channel = new CreateChannel(this);
 
         etdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +140,8 @@ public class AddEvent extends AppCompatActivity implements DatePickerDialog.OnDa
                                 Intent intent = new Intent(AddEvent.this, AdminDashboard.class);
                                 startActivity(intent);
                                 finish();
+                                DisplayNotification1();
+
                             }
                         }
 
@@ -142,6 +153,8 @@ public class AddEvent extends AppCompatActivity implements DatePickerDialog.OnDa
                     });
                 }
             }
+
+
 
             private boolean isEmpty() {
                 if (TextUtils.isEmpty((etname.getText().toString()))) {
@@ -169,6 +182,22 @@ public class AddEvent extends AppCompatActivity implements DatePickerDialog.OnDa
             }
 
         });
+    }
+
+
+    int id = 1;
+    private void DisplayNotification1(){
+        Notification notification = new NotificationCompat.Builder(this,CreateChannel.CHANNEL_1)
+                .setSmallIcon(R.drawable.blood_logo)
+                .setContentTitle("Booked")
+                .setContentText("Hotel has been booked on"+btnaddev)
+                .setCategory(NotificationCompat.CATEGORY_SYSTEM)
+                .build();
+
+
+        notificationManagerCompat.notify(id, notification);
+        id++;
+
     }
 
     @Override

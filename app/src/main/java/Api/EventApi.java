@@ -22,7 +22,7 @@ public interface EventApi {
     Call<RegisterResponse> addEvent(@Body Event event);
 
     @PUT("api/v1/event")
-    Call<UpdateEResponse> updateEvent(@Body Event event);
+    Call<UpdateEResponse> updateevent(@Body Event event);
 
     @HTTP(method = "DELETE", path = "api/v1/event", hasBody = true)
     Call<DeleteResponse> deleteEvent(@Body Event event);

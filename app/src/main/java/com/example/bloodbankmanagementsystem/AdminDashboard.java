@@ -1,6 +1,10 @@
 package com.example.bloodbankmanagementsystem;
 
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +27,7 @@ import retrofit2.Retrofit;
 public class AdminDashboard extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Button btnviewevent;
+    private SensorManager sensorManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,7 @@ public class AdminDashboard extends AppCompatActivity {
         setContentView(R.layout.activity_admin_dashboard);
         recyclerView = findViewById(R.id.recyclerview);
         btnviewevent=findViewById(R.id.btnViewevent);
+        proximity();
         btnviewevent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,10 +43,7 @@ public class AdminDashboard extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         showAllUsers();
-
-
     }
 
     private void showAllUsers() {
@@ -66,5 +69,27 @@ public class AdminDashboard extends AppCompatActivity {
 
             }
         });
+    }
+    private void proximity() {
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        SensorEventListener proxilistener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                if (event.values[0] <= 2) {
+                    Intent intent=new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        };
+        sensorManager.registerListener(proxilistener,sensor, SensorManager.SENSOR_DELAY_NORMAL);
+
     }
 }
